@@ -7,48 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06584EB316DEFA6000CB2D68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB216DEFA6000CB2D68 /* UIKit.framework */; };
-		06584EB516DEFA6000CB2D68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB416DEFA6000CB2D68 /* Foundation.framework */; };
-		06584EB716DEFA6000CB2D68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB616DEFA6000CB2D68 /* CoreGraphics.framework */; };
-		06584EBD16DEFA6000CB2D68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06584EBB16DEFA6000CB2D68 /* InfoPlist.strings */; };
-		06584EBF16DEFA6000CB2D68 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EBE16DEFA6000CB2D68 /* main.m */; };
-		06584EC316DEFA6000CB2D68 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EC216DEFA6000CB2D68 /* AppDelegate.m */; };
-		06584EC516DEFA6000CB2D68 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 06584EC416DEFA6000CB2D68 /* Default.png */; };
-		06584EC716DEFA6000CB2D68 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06584EC616DEFA6000CB2D68 /* Default@2x.png */; };
-		06584EC916DEFA6000CB2D68 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06584EC816DEFA6000CB2D68 /* Default-568h@2x.png */; };
 		06584ED116DEFA6000CB2D68 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */; };
 		06584ED216DEFA6000CB2D68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB216DEFA6000CB2D68 /* UIKit.framework */; };
 		06584ED316DEFA6000CB2D68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB416DEFA6000CB2D68 /* Foundation.framework */; };
 		06584EDB16DEFA6000CB2D68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06584ED916DEFA6000CB2D68 /* InfoPlist.strings */; };
 		06584EDE16DEFA6000CB2D68 /* BlockInjectionTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EDD16DEFA6000CB2D68 /* BlockInjectionTestTests.m */; };
-		06584EED16DEFAF800CB2D68 /* BIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EE916DEFAF800CB2D68 /* BIItem.m */; };
-		06584EEE16DEFAF800CB2D68 /* BILib.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EEB16DEFAF800CB2D68 /* BILib.m */; };
+		06584EEF16DEFC8D00CB2D68 /* BIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EE916DEFAF800CB2D68 /* BIItem.m */; };
+		06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EEB16DEFAF800CB2D68 /* BILib.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		06584ED416DEFA6000CB2D68 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 06584EA716DEFA6000CB2D68 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 06584EAE16DEFA6000CB2D68;
-			remoteInfo = BlockInjectionTest;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		06584EAF16DEFA6000CB2D68 /* BlockInjectionTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlockInjectionTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06584EB216DEFA6000CB2D68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06584EB416DEFA6000CB2D68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06584EB616DEFA6000CB2D68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		06584EBA16DEFA6000CB2D68 /* BlockInjectionTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockInjectionTest-Info.plist"; sourceTree = "<group>"; };
-		06584EBC16DEFA6000CB2D68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		06584EBE16DEFA6000CB2D68 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		06584EC016DEFA6000CB2D68 /* BlockInjectionTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlockInjectionTest-Prefix.pch"; sourceTree = "<group>"; };
-		06584EC116DEFA6000CB2D68 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		06584EC216DEFA6000CB2D68 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		06584EC416DEFA6000CB2D68 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		06584EC616DEFA6000CB2D68 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		06584EC816DEFA6000CB2D68 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockInjectionTestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		06584ED816DEFA6000CB2D68 /* BlockInjectionTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockInjectionTestTests-Info.plist"; sourceTree = "<group>"; };
@@ -60,19 +31,10 @@
 		06584EEA16DEFAF800CB2D68 /* BILib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILib.h; sourceTree = "<group>"; };
 		06584EEB16DEFAF800CB2D68 /* BILib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILib.m; sourceTree = "<group>"; };
 		06584EEC16DEFAF800CB2D68 /* BIRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIRuntime.h; sourceTree = "<group>"; };
+		06584EF116DEFE7300CB2D68 /* BlockInjectionTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlockInjectionTest-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		06584EAC16DEFA6000CB2D68 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				06584EB316DEFA6000CB2D68 /* UIKit.framework in Frameworks */,
-				06584EB516DEFA6000CB2D68 /* Foundation.framework in Frameworks */,
-				06584EB716DEFA6000CB2D68 /* CoreGraphics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		06584ECB16DEFA6000CB2D68 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				06584EE716DEFAF800CB2D68 /* BlockInjection */,
-				06584EB816DEFA6000CB2D68 /* BlockInjectionTest */,
 				06584ED616DEFA6000CB2D68 /* BlockInjectionTestTests */,
 				06584EB116DEFA6000CB2D68 /* Frameworks */,
 				06584EB016DEFA6000CB2D68 /* Products */,
@@ -100,7 +61,6 @@
 		06584EB016DEFA6000CB2D68 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06584EAF16DEFA6000CB2D68 /* BlockInjectionTest.app */,
 				06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */,
 			);
 			name = Products;
@@ -117,30 +77,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		06584EB816DEFA6000CB2D68 /* BlockInjectionTest */ = {
-			isa = PBXGroup;
-			children = (
-				06584EC116DEFA6000CB2D68 /* AppDelegate.h */,
-				06584EC216DEFA6000CB2D68 /* AppDelegate.m */,
-				06584EB916DEFA6000CB2D68 /* Supporting Files */,
-			);
-			path = BlockInjectionTest;
-			sourceTree = "<group>";
-		};
-		06584EB916DEFA6000CB2D68 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				06584EBA16DEFA6000CB2D68 /* BlockInjectionTest-Info.plist */,
-				06584EBB16DEFA6000CB2D68 /* InfoPlist.strings */,
-				06584EBE16DEFA6000CB2D68 /* main.m */,
-				06584EC016DEFA6000CB2D68 /* BlockInjectionTest-Prefix.pch */,
-				06584EC416DEFA6000CB2D68 /* Default.png */,
-				06584EC616DEFA6000CB2D68 /* Default@2x.png */,
-				06584EC816DEFA6000CB2D68 /* Default-568h@2x.png */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		06584ED616DEFA6000CB2D68 /* BlockInjectionTestTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +90,7 @@
 		06584ED716DEFA6000CB2D68 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				06584EF116DEFE7300CB2D68 /* BlockInjectionTest-Prefix.pch */,
 				06584ED816DEFA6000CB2D68 /* BlockInjectionTestTests-Info.plist */,
 				06584ED916DEFA6000CB2D68 /* InfoPlist.strings */,
 			);
@@ -176,23 +113,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		06584EAE16DEFA6000CB2D68 /* BlockInjectionTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 06584EE116DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTest" */;
-			buildPhases = (
-				06584EAB16DEFA6000CB2D68 /* Sources */,
-				06584EAC16DEFA6000CB2D68 /* Frameworks */,
-				06584EAD16DEFA6000CB2D68 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BlockInjectionTest;
-			productName = BlockInjectionTest;
-			productReference = 06584EAF16DEFA6000CB2D68 /* BlockInjectionTest.app */;
-			productType = "com.apple.product-type.application";
-		};
 		06584ECE16DEFA6000CB2D68 /* BlockInjectionTestTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTestTests" */;
@@ -205,7 +125,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				06584ED516DEFA6000CB2D68 /* PBXTargetDependency */,
 			);
 			name = BlockInjectionTestTests;
 			productName = BlockInjectionTestTests;
@@ -233,24 +152,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				06584EAE16DEFA6000CB2D68 /* BlockInjectionTest */,
 				06584ECE16DEFA6000CB2D68 /* BlockInjectionTestTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		06584EAD16DEFA6000CB2D68 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				06584EBD16DEFA6000CB2D68 /* InfoPlist.strings in Resources */,
-				06584EC516DEFA6000CB2D68 /* Default.png in Resources */,
-				06584EC716DEFA6000CB2D68 /* Default@2x.png in Resources */,
-				06584EC916DEFA6000CB2D68 /* Default-568h@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		06584ECC16DEFA6000CB2D68 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,44 +185,19 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		06584EAB16DEFA6000CB2D68 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				06584EBF16DEFA6000CB2D68 /* main.m in Sources */,
-				06584EC316DEFA6000CB2D68 /* AppDelegate.m in Sources */,
-				06584EED16DEFAF800CB2D68 /* BIItem.m in Sources */,
-				06584EEE16DEFAF800CB2D68 /* BILib.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		06584ECA16DEFA6000CB2D68 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				06584EDE16DEFA6000CB2D68 /* BlockInjectionTestTests.m in Sources */,
+				06584EEF16DEFC8D00CB2D68 /* BIItem.m in Sources */,
+				06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		06584ED516DEFA6000CB2D68 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 06584EAE16DEFA6000CB2D68 /* BlockInjectionTest */;
-			targetProxy = 06584ED416DEFA6000CB2D68 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		06584EBB16DEFA6000CB2D68 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				06584EBC16DEFA6000CB2D68 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		06584ED916DEFA6000CB2D68 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -385,38 +267,15 @@
 			};
 			name = Release;
 		};
-		06584EE216DEFA6000CB2D68 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlockInjectionTest/BlockInjectionTest-Prefix.pch";
-				INFOPLIST_FILE = "BlockInjectionTest/BlockInjectionTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		06584EE316DEFA6000CB2D68 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlockInjectionTest/BlockInjectionTest-Prefix.pch";
-				INFOPLIST_FILE = "BlockInjectionTest/BlockInjectionTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 		06584EE516DEFA6000CB2D68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BlockInjectionTest.app/BlockInjectionTest";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlockInjectionTest/BlockInjectionTest-Prefix.pch";
+				GCC_PREFIX_HEADER = "BlockInjectionTest-Prefix.pch";
 				INFOPLIST_FILE = "BlockInjectionTestTests/BlockInjectionTestTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -433,7 +292,7 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlockInjectionTest/BlockInjectionTest-Prefix.pch";
+				GCC_PREFIX_HEADER = "BlockInjectionTest-Prefix.pch";
 				INFOPLIST_FILE = "BlockInjectionTestTests/BlockInjectionTestTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -453,14 +312,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		06584EE116DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				06584EE216DEFA6000CB2D68 /* Debug */,
-				06584EE316DEFA6000CB2D68 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTestTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -468,6 +319,7 @@
 				06584EE616DEFA6000CB2D68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

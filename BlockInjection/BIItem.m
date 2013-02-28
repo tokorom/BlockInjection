@@ -1,12 +1,12 @@
 //
-//  MIItem.m
+//  BIItem.m
 //
 //  Created by ToKoRo on 2013-02-27.
 //
 
-#import "MIItem.h"
+#import "BIItem.h"
 
-@implementation MIItem
+@implementation BIItem
 
 - (id)init
 {

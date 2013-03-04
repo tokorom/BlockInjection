@@ -114,8 +114,13 @@
       int index = 2;
       unsigned int argumentsCount = item.numberOfArguments;
       while (argumentsCount--) {
-        pval = va_arg(argp, void*);
-        if (pval) {
+        NSUInteger size;
+        NSGetSizeAndAlignment([item.signature getArgumentTypeAtIndex:index], &size, NULL);
+        if (8 == size) {
+          double dval = va_arg(argp, double);
+          [invocation setArgument:&dval atIndex:index++];
+        } else {
+          pval = va_arg(argp, void*);
           [invocation setArgument:&pval atIndex:index++];
         }
       }

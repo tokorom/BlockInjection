@@ -27,6 +27,7 @@
 
 @interface Buzz : NSObject
 - (void)sendInt1:(int)int1 int2:(int)int2 long1:(long)long1;
+- (void)sendChar:(char)c d:(double)d;
 @end 
 
 @implementation Buzz
@@ -34,6 +35,11 @@
 {
   NSLog(@"%d %d %ld", int1, int2, long1);
 }
+- (void)sendChar:(char)c d:(double)d
+{
+  NSLog(@"%c %f", c, d);
+}
+
 @end 
 
 #pragma mark - Child
@@ -330,6 +336,40 @@
   [[ViewController new] buttonDidPush:nil];
 
   STAssertEquals(i, 10, @"i is invalid.");
+}
+
+- (void)testNilArgument
+{
+  __block NSString* str = nil;
+  __block int i = 0;
+  [BILib injectToSelector:@selector(sayMessage:tag:) forClass:[Child class] preprocess:^(Child* child, NSString* message, int tag){
+    str = message;
+    i = tag;
+  }];
+
+  Child* child = [Child new];
+
+  STAssertEquals(i, 0, @"i is invalid.");
+
+  [child sayMessage:nil tag:999];
+
+  STAssertNil(str, @"str is not nil.");
+  STAssertEquals(i, 999, @"i is invalid.");
+}
+
+- (void)testLongLongArgument
+{
+  __block char bc;
+  __block double bd;
+  [BILib injectToSelector:@selector(sendChar:d:) forClass:[Buzz class] preprocess:^(Buzz* buzz, char c, double d){
+    bc = c;
+    bd = d;
+  }];
+
+  [[Buzz new] sendChar:'k' d:0.33333];
+
+  STAssertEquals(bc, (char)'k', @"bc is invalid.");
+  STAssertEquals(bd, (double)0.33333, @"bd is invalid.");
 }
 
 @end

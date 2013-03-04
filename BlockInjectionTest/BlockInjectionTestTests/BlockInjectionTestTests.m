@@ -50,6 +50,19 @@
 }
 @end 
 
+#pragma mark - ViewController
+
+@interface ViewController : NSObject
+- (void)buttonDidPush:(id)sender;
+@end 
+
+@implementation ViewController
+- (void)buttonDidPush:(id)sender
+{
+  NSLog(@"buttonDidPush:");
+}
+@end 
+
 #pragma mark - TestCase
 
 @implementation BlockInjectionTestTests
@@ -57,6 +70,7 @@
 - (void)setUp
 {
   [super setUp];
+  [BILib clear];
 }
 
 - (void)tearDown
@@ -67,9 +81,22 @@
 - (void)testInject
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^{
     ++i;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
+  }];
+
+  STAssertEquals(i, 0, @"i is invalid.");
+
+  [[Bizz new] sayMessage:@"hello!"];
+
+  STAssertEquals(i, 1, @"i is invalid.");
+}
+
+- (void)testPostprocess
+{
+  __block int i = 0;
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] postprocess:^{
+    ++i;
   }];
 
   STAssertEquals(i, 0, @"i is invalid.");
@@ -82,24 +109,23 @@
 - (void)testCallTwice
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^{
     ++i;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
   }];
 
   STAssertEquals(i, 0, @"i is invalid.");
 
   [[Bizz new] sayMessage:@"hello!"];
+  [[Bizz new] sayMessage:@"hello!"];
 
-  STAssertEquals(i, 1, @"i is invalid.");
+  STAssertEquals(i, 2, @"i is invalid.");
 }
 
 - (void)testHandleProperty
 {
   __block NSString* b = nil;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz){
     b = bizz.backup;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
   }];
 
   STAssertNil(b, @"b is invalid.");
@@ -114,9 +140,8 @@
 - (void)testHandleArg
 {
   __block NSString* b = nil;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
     b = message;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
   }];
 
   STAssertNil(b, @"b is invalid.");
@@ -131,11 +156,10 @@
 {
   __block int x, y;
   __block long l;
-  [BILib injectToSelector:@selector(sendInt1:int2:long1:) forClass:[Buzz class] block:^(Buzz* buzz, int int1, int int2, long long1){
+  [BILib injectToSelector:@selector(sendInt1:int2:long1:) forClass:[Buzz class] preprocess:^(Buzz* buzz, int int1, int int2, long long1){
     x = int1;
     y = int2;
     l = long1;
-    [BILib performOriginalSelector:@selector(sendInt1:int2:long1:) target:buzz, &int1, &int2, &long1, nil];
   }];
 
   [[Buzz new] sendInt1:1 int2:2 long1:0xFFFFFFFF];
@@ -148,9 +172,8 @@
 - (void)testInjectWithString
 {
   __block int i = 0;
-  [BILib injectToSelectorWithMethodName:@"sayMessage:" forClassName:@"Bizz" block:^(id target, id arg1){
+  [BILib injectToSelectorWithMethodName:@"sayMessage:" forClassName:@"Bizz" preprocess:^{
     ++i;
-    [BILib performOriginalSelectorWithMethodName:@"sayMessage:" target:target, &arg1, nil];
   }];
 
   STAssertEquals(i, 0, @"i is invalid.");
@@ -163,36 +186,11 @@
 - (void)testInjectTwice
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
     i += 100;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
   }];
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
     i += 200;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
-  }];
-
-  STAssertEquals(i, 0, @"i is invalid.");
-
-  [[Bizz new] sayMessage:@"hello!"];
-
-  STAssertEquals(i, 200, @"i is invalid.");
-}
-
-- (void)testInjectTriple
-{
-  __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
-    i += 100;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
-  }];
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
-    i += 200;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
-  }];
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] block:^(Bizz* bizz, NSString* message){
-    i += 300;
-    [BILib performOriginalSelector:@selector(sayMessage:) target:bizz, &message, nil];
   }];
 
   STAssertEquals(i, 0, @"i is invalid.");
@@ -202,11 +200,30 @@
   STAssertEquals(i, 300, @"i is invalid.");
 }
 
+- (void)testInjectTriple
+{
+  __block int i = 0;
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+    i += 100;
+  }];
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+    i += 200;
+  }];
+  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+    i += 300;
+  }];
+
+  STAssertEquals(i, 0, @"i is invalid.");
+
+  [[Bizz new] sayMessage:@"hello!"];
+
+  STAssertEquals(i, 600, @"i is invalid.");
+}
+
 - (void)testSubclass
 {
-  [BILib injectToSelector:@selector(sayMessage:tag:) forClass:[Child class] block:^(Child* child, NSString* message, int tag){
+  [BILib injectToSelector:@selector(sayMessage:tag:) forClass:[Child class] preprocess:^(Child* child, NSString* message, int tag){
     ++child.count;
-    [BILib performOriginalSelector:@selector(sayMessage:tag:) target:child, &message, &tag, nil];
   }];
 
   Child* child = [Child new];
@@ -220,9 +237,8 @@
 
 - (void)testUIView
 {
-  [BILib injectToSelector:@selector(setFrame:) forClass:[UIView class] block:^(UIView* view, CGRect frame){
+  [BILib injectToSelector:@selector(setFrame:) forClass:[UIView class] preprocess:^(UIView* view, CGRect frame){
     view.tag += 100;
-    [BILib performOriginalSelector:@selector(setFrame:) target:view, &frame, nil];
   }];
 
   UIView* view = [UIView new];
@@ -239,13 +255,11 @@
   __block BOOL bflag = NO;
   [BILib injectToSelector:@selector(presentViewController:animated:completion:)
                  forClass:[UIViewController class]
-                    block:^(id target, UIViewController* vc, BOOL flag, id completion)
+                    preprocess:^(id target, UIViewController* vc, BOOL flag, id completion)
   {
     NSLog(@"presentViewController:%@ animated:%d completion:%@", vc, flag, completion);
 
     bflag = flag;
-
-    [BILib performOriginalSelector:@selector(presentViewController:animated:completion:) target:target, &vc, &flag, &completion, nil];
   }];
 
   UIViewController* viewController = [UIViewController new];
@@ -259,10 +273,8 @@
 
 - (void)testReturnValue
 {
-  [BILib injectToSelector:@selector(count) forClass:[Bizz class] block:^(Bizz* bizz){
+  [BILib injectToSelector:@selector(count) forClass:[Bizz class] preprocess:^(Bizz* bizz){
     NSLog(@"preprocess");
-    int reti = (int)[BILib performOriginalSelector:@selector(count) target:bizz, nil];
-    return reti;
   }];
 
   Bizz* bizz = [Bizz new];
@@ -277,10 +289,8 @@
 
 - (void)testReturnValueForObject
 {
-  [BILib injectToSelector:@selector(backup) forClass:[Bizz class] block:^(Bizz* bizz){
+  [BILib injectToSelector:@selector(backup) forClass:[Bizz class] preprocess:^(Bizz* bizz){
     NSLog(@"preprocess");
-    id ret = (id)[BILib performOriginalSelector:@selector(backup) target:bizz, nil];
-    return ret;
   }];
 
   Bizz* bizz = [Bizz new];
@@ -288,6 +298,38 @@
   bizz.backup = @"xxx";
 
   STAssertTrue([bizz.backup isEqualToString:@"xxx"], @"bizz.backup is invalid: %@", bizz.backup);
+}
+
+- (void)testForReadme
+{
+  __block int i = 0;
+  [BILib injectToSelector:@selector(buttonDidPush:) forClass:[ViewController class] preprocess:^{
+
+    //[tracker sendEventWithCategory:@"uiAction"
+                        //withAction:@"buttonDidPush"
+                         //withLabel:nil
+                         //withValue:0];
+
+    ++i;
+  }];
+
+  [[ViewController new] buttonDidPush:nil];
+
+  STAssertEquals(i, 1, @"i is invalid.");
+
+  [BILib injectToSelectorWithMethodName:@"buttonDidPush:" forClassName:@"ViewController" preprocess:^{
+
+    //[tracker sendEventWithCategory:@"uiAction"
+                        //withAction:@"buttonDidPush"
+                         //withLabel:nil
+                         //withValue:0];
+
+    i = 10;
+  }];
+
+  [[ViewController new] buttonDidPush:nil];
+
+  STAssertEquals(i, 10, @"i is invalid.");
 }
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061D0EEC16E48F460041268A /* BIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEB16E48F460041268A /* BIItem.m */; };
+		061D0EEF16E4A0660041268A /* BIItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEE16E4A0660041268A /* BIItemManager.m */; };
 		06584ED116DEFA6000CB2D68 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */; };
 		06584ED216DEFA6000CB2D68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB216DEFA6000CB2D68 /* UIKit.framework */; };
 		06584ED316DEFA6000CB2D68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB416DEFA6000CB2D68 /* Foundation.framework */; };
@@ -16,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		061D0EEA16E48F460041268A /* BIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItem.h; sourceTree = "<group>"; };
+		061D0EEB16E48F460041268A /* BIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIItem.m; sourceTree = "<group>"; };
+		061D0EED16E4A0660041268A /* BIItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItemManager.h; sourceTree = "<group>"; };
+		061D0EEE16E4A0660041268A /* BIItemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIItemManager.m; sourceTree = "<group>"; };
 		06584EB216DEFA6000CB2D68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06584EB416DEFA6000CB2D68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06584EB616DEFA6000CB2D68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -96,6 +102,10 @@
 		06584EE716DEFAF800CB2D68 /* BlockInjection */ = {
 			isa = PBXGroup;
 			children = (
+				061D0EED16E4A0660041268A /* BIItemManager.h */,
+				061D0EEE16E4A0660041268A /* BIItemManager.m */,
+				061D0EEA16E48F460041268A /* BIItem.h */,
+				061D0EEB16E48F460041268A /* BIItem.m */,
 				06584EEA16DEFAF800CB2D68 /* BILib.h */,
 				06584EEB16DEFAF800CB2D68 /* BILib.m */,
 			);
@@ -184,6 +194,8 @@
 			files = (
 				06584EDE16DEFA6000CB2D68 /* BlockInjectionTestTests.m in Sources */,
 				06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */,
+				061D0EEC16E48F460041268A /* BIItem.m in Sources */,
+				061D0EEF16E4A0660041268A /* BIItemManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

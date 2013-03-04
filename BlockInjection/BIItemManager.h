@@ -1,0 +1,18 @@
+//
+//  BIItemManager.h
+//
+//  Created by ToKoRo on 2013-03-04.
+//
+
+@class BIItem;
+
+@interface BIItemManager : NSObject
+
++ (BIItemManager*)sharedInstance;
+
+- (BIItem*)itemForMethodName:(NSString*)methodName forClass:(Class)class;
+- (void)setItem:(BIItem*)item forMethodName:(NSString*)methodName forClass:(Class)class;
+
+- (void)clear;
+
+@end

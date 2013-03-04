@@ -6,10 +6,11 @@
 
 @interface BILib : NSObject
 
-+ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class block:(id)block;
-+ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className block:(id)block;
++ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class preprocess:(id)preprocess;
++ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class postprocess:(id)postprocess;
++ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className preprocess:(id)preprocess;
++ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className postprocess:(id)postprocess;
 
-+ (void*)performOriginalSelector:(SEL)sel target:(id)target, ... NS_REQUIRES_NIL_TERMINATION;
-+ (void*)performOriginalSelectorWithMethodName:(NSString*)methodName target:(id)target, ... NS_REQUIRES_NIL_TERMINATION;
++ (void)clear;
 
 @end

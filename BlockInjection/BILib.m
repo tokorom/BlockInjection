@@ -36,16 +36,28 @@
   return [BILib injectToSelector:sel forClass:class block:block];
 }
 
-+ (void)performOriginalSelector:(SEL)sel target:(id)target, ...
++ (void*)performOriginalSelector:(SEL)sel target:(id)target, ...
 {
   va_list argp;
   va_start(argp, target);
-  [BILib performOriginalSelector:sel target:target argp:argp];
+  void* retp = [BILib performOriginalSelector:sel target:target argp:argp];
   va_end(argp);
+  return retp;
 }
 
-+ (void)performOriginalSelector:(SEL)sel target:(id)target argp:(va_list)argp
++ (void*)performOriginalSelectorWithMethodName:(NSString*)methodName target:(id)target, ...
 {
+  va_list argp;
+  va_start(argp, target);
+  SEL sel = sel_getUid([methodName UTF8String]);
+  void* retp = [BILib performOriginalSelector:sel target:target argp:argp];
+  va_end(argp);
+  return retp;
+}
+
++ (void*)performOriginalSelector:(SEL)sel target:(id)target argp:(va_list)argp
+{
+  void* retp = NULL;
   NSString* methodName = [NSString stringWithUTF8String:sel_getName(sel)];
   SEL originalSel = sel_registerName([[BILib saveNameForMethodName:methodName] UTF8String]);
   Method method = class_getInstanceMethod([target class], sel);
@@ -67,19 +79,18 @@
     }
 
     [invocation invoke];
+
+    NSUInteger returnLength = [[invocation methodSignature] methodReturnLength];
+    if (returnLength) {
+      void* result = __builtin_alloca(returnLength);
+      [invocation getReturnValue:result];
+      retp = result;
+    }
   } else {
     NSLog(@"%s is not found.", sel_getName(originalSel));
   }
   va_end(argp);
-}
-
-+ (void)performOriginalSelectorWithMethodName:(NSString*)methodName target:(id)target, ...
-{
-  va_list argp;
-  va_start(argp, target);
-  SEL sel = sel_getUid([methodName UTF8String]);
-  [BILib performOriginalSelector:sel target:target argp:argp];
-  va_end(argp);
+  return retp ? *(void**)retp : NULL;
 }
 
 #pragma mark - Private Methods

@@ -257,4 +257,37 @@
   STAssertEquals(bflag, YES, @"blag is invalid.");
 }
 
+- (void)testReturnValue
+{
+  [BILib injectToSelector:@selector(count) forClass:[Bizz class] block:^(Bizz* bizz){
+    NSLog(@"preprocess");
+    int reti = (int)[BILib performOriginalSelector:@selector(count) target:bizz, nil];
+    return reti;
+  }];
+
+  Bizz* bizz = [Bizz new];
+
+  STAssertEquals(bizz.count, 0, @"i is invalid.");
+
+  bizz.count = 100;
+  int ret = bizz.count;
+
+  STAssertEquals(ret, 100, @"ret is invalid.");
+}
+
+- (void)testReturnValueForObject
+{
+  [BILib injectToSelector:@selector(backup) forClass:[Bizz class] block:^(Bizz* bizz){
+    NSLog(@"preprocess");
+    id ret = (id)[BILib performOriginalSelector:@selector(backup) target:bizz, nil];
+    return ret;
+  }];
+
+  Bizz* bizz = [Bizz new];
+
+  bizz.backup = @"xxx";
+
+  STAssertTrue([bizz.backup isEqualToString:@"xxx"], @"bizz.backup is invalid: %@", bizz.backup);
+}
+
 @end

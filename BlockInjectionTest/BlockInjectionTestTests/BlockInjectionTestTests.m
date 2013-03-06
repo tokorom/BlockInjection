@@ -23,11 +23,30 @@
 }
 @end 
 
+#pragma mark - struct 17
+
+typedef struct bilib_test_17 {
+  char c;
+  long l1;
+  long l2;
+  long l3;
+  long l4;
+} bilib_test_17;
+
+#pragma mark - struct 17
+
+typedef struct bilib_test_1024 {
+  char buff[1024];
+  char c;
+} bilib_test_1024;
+
 #pragma mark - Buzz
 
 @interface Buzz : NSObject
 - (void)sendInt1:(int)int1 int2:(int)int2 long1:(long)long1;
 - (void)sendChar:(char)c d:(double)d;
+- (void)sendStruct17:(bilib_test_17)st1 st2:(bilib_test_17)st2;
+- (void)sendStruct1024:(bilib_test_1024)st1024;
 @end 
 
 @implementation Buzz
@@ -39,7 +58,12 @@
 {
   NSLog(@"%c %f", c, d);
 }
-
+- (void)sendStruct17:(bilib_test_17)st1 st2:(bilib_test_17)st2
+{
+}
+- (void)sendStruct1024:(bilib_test_1024)st1024
+{
+}
 @end 
 
 #pragma mark - Child
@@ -370,6 +394,71 @@
 
   STAssertEquals(bc, (char)'k', @"bc is invalid.");
   STAssertEquals(bd, (double)0.33333, @"bd is invalid.");
+}
+
+- (void)testStructArgument
+{
+  __block CGFloat height = 0.0;
+  [BILib injectToSelector:@selector(setFrame:) forClass:[UIView class] preprocess:^(UIView* view, CGRect frame){
+    NSLog(@"%@ setFarme:(%f, %f, %f, %f)", NSStringFromClass(view.class), frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+    height = frame.size.height;
+  }];
+
+  UIView* view = [UIView new];
+
+  STAssertEquals(height, (CGFloat)0.0, @"height is invalid.");
+
+  [view setFrame:CGRectMake(10, 0, 20, 50)];
+
+  STAssertEquals(height, (CGFloat)50.0, @"height is invalid.");
+}
+
+- (void)testStruct17Argument
+{
+  __block long l14 = 0;
+  __block long l24 = 0;
+  [BILib injectToSelector:@selector(sendStruct17:st2:) forClass:[Buzz class] preprocess:^(id target, bilib_test_17 st1, bilib_test_17 st2){
+    NSLog(@"st1:(%c, %ld, %ld, %ld, %ld)", st1.c, st1.l1, st1.l2, st1.l3, st1.l4);
+    NSLog(@"st2:(%c, %ld, %ld, %ld, %ld)", st2.c, st2.l1, st2.l2, st2.l3, st2.l4);
+    l14 = st1.l4;
+    l24 = st2.l4;
+  }];
+
+  STAssertEquals(l14, (long)0, @"l14 is invalid.");
+  STAssertEquals(l24, (long)0, @"l24 is invalid.");
+
+  bilib_test_17 st1;
+  st1.c = 'c';
+  st1.l1 = 1;
+  st1.l2 = 2;
+  st1.l3 = 3;
+  st1.l4 = 256;
+  bilib_test_17 st2;
+  st2.c = '0';
+  st2.l1 = 11;
+  st2.l2 = 12;
+  st2.l3 = 13;
+  st2.l4 = 1256;
+  [[Buzz new] sendStruct17:st1 st2:st2];
+
+  STAssertEquals(l14, (long)256, @"l14 is invalid.");
+  STAssertEquals(l24, (long)1256, @"l24 is invalid.");
+}
+
+- (void)testStruct1024Argument
+{
+  __block char c = 0;
+  [BILib injectToSelector:@selector(sendStruct1024:) forClass:[Buzz class] preprocess:^(id target, bilib_test_1024 st1024){
+    c = st1024.c;
+  }];
+
+  STAssertEquals(c, (char)0, @"c is invalid.");
+
+  bilib_test_1024 st1024;
+  st1024.c = 'x';
+  [[Buzz new] sendStruct1024:st1024];
+
+  STAssertEquals(c, (char)'x', @"c is invalid.");
 }
 
 @end

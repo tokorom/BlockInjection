@@ -7,6 +7,7 @@
 #import "BILib.h"
 #import "BIItem.h"
 #import "BIItemManager.h"
+#import "BILibArg.h"
 #import <objc/runtime.h>
 
 @implementation BILib
@@ -108,22 +109,10 @@
       void* retp = NULL;
       NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:item.signature];
       [invocation setTarget:target];
+      // Set arguments
       va_list argp;
       va_start(argp, target);
-      void* pval = (__bridge void*)(id)target;
-      int index = 2;
-      unsigned int argumentsCount = item.numberOfArguments;
-      while (argumentsCount--) {
-        NSUInteger size;
-        NSGetSizeAndAlignment([item.signature getArgumentTypeAtIndex:index], &size, NULL);
-        if (8 == size) {
-          double dval = va_arg(argp, double);
-          [invocation setArgument:&dval atIndex:index++];
-        } else {
-          pval = va_arg(argp, void*);
-          [invocation setArgument:&pval atIndex:index++];
-        }
-      }
+      [BILibArg sendArgumentsToInvocation:invocation arguments:&argp numberOfArguments:item.numberOfArguments signature:item.signature];
       va_end(argp);
       // Preprocess
       [item invokePreprocessWithInvocation:invocation];

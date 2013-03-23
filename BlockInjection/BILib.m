@@ -64,46 +64,90 @@
 {
   NSString* methodName = [NSString stringWithUTF8String:sel_getName(sel)];
   SEL saveSel = sel_registerName([[BILib saveNameForMethodName:methodName] UTF8String]);
-  Method originalMethod = class_getInstanceMethod(class, sel);
-  Method savedMethod = class_getInstanceMethod(class, saveSel);
+  BOOL isClassMethod = NO;
+  Method originalMethod = [BILib getMethodInClass:class selector:sel isClassMethod:&isClassMethod];
+  Method savedMethod = [BILib getMethodInClass:class selector:saveSel];
 
   if (!savedMethod && originalMethod) {
     // Save original method
-    IMP originalImp = method_getImplementation(originalMethod);
-    class_addMethod(class, saveSel, originalImp, method_getTypeEncoding(originalMethod));
+    [BILib addMethodToClass:class selector:saveSel imp:method_getImplementation(originalMethod) typeEncoding:method_getTypeEncoding(originalMethod) isClassMethod:isClassMethod];
   }
 
   // Replace implementation
   BIItem* item = [[BIItemManager sharedInstance] itemForMethodName:methodName forClass:class];
   if (!item) {
     item = [BIItem new];
+    item.targetClass = class;
     item.originalSel = saveSel;
+    item.originalMethod = originalMethod;
     item.numberOfArguments = method_getNumberOfArguments(originalMethod) - 2;
     item.signature = [NSMethodSignature signatureWithObjCTypes:method_getTypeEncoding(originalMethod)];
+    item.isClassMethod = isClassMethod;
     [[BIItemManager sharedInstance] setItem:item forMethodName:methodName forClass:class];
   }
+  [BILib savePreprocess:preprocess andPostprocess:postprocess withItem:item forMethodName:methodName];
+  [BILib replaceImplementationWithItem:item];
+
+  return YES;
+}
+
++ (Method)getMethodInClass:(Class)class selector:(SEL)selector
+{
+  return [BILib getMethodInClass:class selector:selector isClassMethod:NULL];
+}
+
++ (Method)getMethodInClass:(Class)class selector:(SEL)selector isClassMethod:(BOOL*)isClassMethod
+{
+  if (isClassMethod) *isClassMethod = NO;
+  Method method = class_getInstanceMethod(class, selector);
+  if (!method) {
+    method = class_getClassMethod(class, selector);
+    if (method) {
+      if (isClassMethod) *isClassMethod = YES;
+    }
+  }
+  return method;
+}
+
++ (void)addMethodToClass:(Class)class selector:(SEL)selector imp:(IMP)imp typeEncoding:(const char*)typeEncoding isClassMethod:(BOOL)isClassMethod
+{
+  Method method = [BILib getMethodInClass:class selector:selector];
+  if (method) {
+    method_setImplementation(method, imp);
+  } else {
+    if (isClassMethod) {
+      class = object_getClass(class);
+    }
+    class_addMethod(class, selector, imp, typeEncoding);
+  }
+}
+
++ (void)savePreprocess:(id)preprocess andPostprocess:(id)postprocess withItem:(BIItem*)item forMethodName:(NSString*)methodName
+{
   if (preprocess) {
     // Save preprocess
     SEL preprocessSel = sel_registerName([[BILib preprocessNameForMethodName:methodName index:[item numberOfPreprocess]] UTF8String]);
-    Method preMethod = class_getInstanceMethod(class, preprocessSel);
-    if (preMethod) {
-      method_setImplementation(preMethod, imp_implementationWithBlock(preprocess));
-    } else {
-      class_addMethod(class, preprocessSel, imp_implementationWithBlock(preprocess), method_getTypeEncoding(originalMethod));
-    }
+    [BILib addMethodToClass:item.targetClass
+                   selector:preprocessSel
+                        imp:imp_implementationWithBlock(preprocess)
+               typeEncoding:method_getTypeEncoding(item.originalMethod)
+              isClassMethod:item.isClassMethod];
     [item addPreprocessForSelector:preprocessSel];
   }
   if (postprocess) {
     // Save postprocess
     SEL postprocessSel = sel_registerName([[BILib postprocessNameForMethodName:methodName index:[item numberOfPostprocess]] UTF8String]);
-    Method postMethod = class_getInstanceMethod(class, postprocessSel);
-    if (postMethod) {
-      method_setImplementation(postMethod, imp_implementationWithBlock(postprocess));
-    } else {
-      class_addMethod(class, postprocessSel, imp_implementationWithBlock(postprocess), method_getTypeEncoding(originalMethod));
-    }
+    [BILib addMethodToClass:item.targetClass
+                   selector:postprocessSel
+                        imp:imp_implementationWithBlock(postprocess)
+               typeEncoding:method_getTypeEncoding(item.originalMethod)
+              isClassMethod:item.isClassMethod];
     [item addPostprocessForSelector:postprocessSel];
   }
+}
+
++ (void)replaceImplementationWithItem:(BIItem*)item
+{
   if (item.signature) {
     id replaceBlock = ^(id target, ...){
       void* retp = NULL;
@@ -130,10 +174,8 @@
       [item invokePostprocessWithInvocation:invocation];
       return retp ? *(void**)retp : NULL;
     };
-    method_setImplementation(originalMethod, imp_implementationWithBlock(replaceBlock));
+    method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
   }
-
-  return YES;
 }
 
 @end

@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0601289416FD671400603736 /* ClassMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0601289316FD671400603736 /* ClassMethodTest.m */; };
 		061D0EEC16E48F460041268A /* BIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEB16E48F460041268A /* BIItem.m */; };
 		061D0EEF16E4A0660041268A /* BIItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEE16E4A0660041268A /* BIItemManager.m */; };
 		06584ED116DEFA6000CB2D68 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */; };
 		06584ED216DEFA6000CB2D68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB216DEFA6000CB2D68 /* UIKit.framework */; };
 		06584ED316DEFA6000CB2D68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB416DEFA6000CB2D68 /* Foundation.framework */; };
 		06584EDB16DEFA6000CB2D68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06584ED916DEFA6000CB2D68 /* InfoPlist.strings */; };
-		06584EDE16DEFA6000CB2D68 /* BlockInjectionTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EDD16DEFA6000CB2D68 /* BlockInjectionTestTests.m */; };
+		06584EDE16DEFA6000CB2D68 /* BasicTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EDD16DEFA6000CB2D68 /* BasicTest.m */; };
 		06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EEB16DEFAF800CB2D68 /* BILib.m */; };
 		06941C1016E7344800EDAA36 /* BILibArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 06941C0F16E7344800EDAA36 /* BILibArg.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0601289216FD671400603736 /* ClassMethodTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMethodTest.h; sourceTree = "<group>"; };
+		0601289316FD671400603736 /* ClassMethodTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMethodTest.m; sourceTree = "<group>"; };
 		061D0EEA16E48F460041268A /* BIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItem.h; sourceTree = "<group>"; };
 		061D0EEB16E48F460041268A /* BIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIItem.m; sourceTree = "<group>"; };
 		061D0EED16E4A0660041268A /* BIItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItemManager.h; sourceTree = "<group>"; };
@@ -30,8 +33,8 @@
 		06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		06584ED816DEFA6000CB2D68 /* BlockInjectionTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockInjectionTestTests-Info.plist"; sourceTree = "<group>"; };
 		06584EDA16DEFA6000CB2D68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		06584EDC16DEFA6000CB2D68 /* BlockInjectionTestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockInjectionTestTests.h; sourceTree = "<group>"; };
-		06584EDD16DEFA6000CB2D68 /* BlockInjectionTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockInjectionTestTests.m; sourceTree = "<group>"; };
+		06584EDC16DEFA6000CB2D68 /* BasicTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicTest.h; sourceTree = "<group>"; };
+		06584EDD16DEFA6000CB2D68 /* BasicTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicTest.m; sourceTree = "<group>"; };
 		06584EEA16DEFAF800CB2D68 /* BILib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILib.h; sourceTree = "<group>"; };
 		06584EEB16DEFAF800CB2D68 /* BILib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILib.m; sourceTree = "<group>"; };
 		06584EF116DEFE7300CB2D68 /* BlockInjectionTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlockInjectionTest-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -85,8 +88,10 @@
 		06584ED616DEFA6000CB2D68 /* BlockInjectionTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				06584EDC16DEFA6000CB2D68 /* BlockInjectionTestTests.h */,
-				06584EDD16DEFA6000CB2D68 /* BlockInjectionTestTests.m */,
+				06584EDC16DEFA6000CB2D68 /* BasicTest.h */,
+				06584EDD16DEFA6000CB2D68 /* BasicTest.m */,
+				0601289216FD671400603736 /* ClassMethodTest.h */,
+				0601289316FD671400603736 /* ClassMethodTest.m */,
 				06584ED716DEFA6000CB2D68 /* Supporting Files */,
 			);
 			path = BlockInjectionTestTests;
@@ -197,11 +202,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06584EDE16DEFA6000CB2D68 /* BlockInjectionTestTests.m in Sources */,
+				06584EDE16DEFA6000CB2D68 /* BasicTest.m in Sources */,
 				06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */,
 				061D0EEC16E48F460041268A /* BIItem.m in Sources */,
 				061D0EEF16E4A0660041268A /* BIItemManager.m in Sources */,
 				06941C1016E7344800EDAA36 /* BILibArg.m in Sources */,
+				0601289416FD671400603736 /* ClassMethodTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

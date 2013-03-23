@@ -111,7 +111,7 @@ typedef struct bilib_test_1024 {
 - (void)testInject
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^{
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^{
     ++i;
   }];
 
@@ -125,7 +125,7 @@ typedef struct bilib_test_1024 {
 - (void)testPostprocess
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] postprocess:^{
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) postprocess:^{
     ++i;
   }];
 
@@ -139,7 +139,7 @@ typedef struct bilib_test_1024 {
 - (void)testCallTwice
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^{
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^{
     ++i;
   }];
 
@@ -154,7 +154,7 @@ typedef struct bilib_test_1024 {
 - (void)testHandleProperty
 {
   __block NSString* b = nil;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz){
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz){
     b = bizz.backup;
   }];
 
@@ -170,7 +170,7 @@ typedef struct bilib_test_1024 {
 - (void)testHandleArg
 {
   __block NSString* b = nil;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz, NSString* message){
     b = message;
   }];
 
@@ -186,7 +186,7 @@ typedef struct bilib_test_1024 {
 {
   __block int x, y;
   __block long l;
-  [BILib injectToSelector:@selector(sendInt1:int2:long1:) forClass:[Buzz class] preprocess:^(Buzz* buzz, int int1, int int2, long long1){
+  [BILib injectToClass:[Buzz class] selector:@selector(sendInt1:int2:long1:) preprocess:^(Buzz* buzz, int int1, int int2, long long1){
     x = int1;
     y = int2;
     l = long1;
@@ -202,7 +202,7 @@ typedef struct bilib_test_1024 {
 - (void)testInjectWithString
 {
   __block int i = 0;
-  [BILib injectToSelectorWithMethodName:@"sayMessage:" forClassName:@"Bizz" preprocess:^{
+  [BILib injectToClassWithName:@"Bizz" methodName:@"sayMessage:" preprocess:^{
     ++i;
   }];
 
@@ -216,10 +216,10 @@ typedef struct bilib_test_1024 {
 - (void)testInjectTwice
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz, NSString* message){
     i += 100;
   }];
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz, NSString* message){
     i += 200;
   }];
 
@@ -233,13 +233,13 @@ typedef struct bilib_test_1024 {
 - (void)testInjectTriple
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz, NSString* message){
     i += 100;
   }];
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz, NSString* message){
     i += 200;
   }];
-  [BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+  [BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz, NSString* message){
     i += 300;
   }];
 
@@ -252,7 +252,7 @@ typedef struct bilib_test_1024 {
 
 - (void)testSubclass
 {
-  [BILib injectToSelector:@selector(sayMessage:tag:) forClass:[Child class] preprocess:^(Child* child, NSString* message, int tag){
+  [BILib injectToClass:[Child class] selector:@selector(sayMessage:tag:) preprocess:^(Child* child, NSString* message, int tag){
     ++child.count;
   }];
 
@@ -267,7 +267,7 @@ typedef struct bilib_test_1024 {
 
 - (void)testUIView
 {
-  [BILib injectToSelector:@selector(setFrame:) forClass:[UIView class] preprocess:^(UIView* view, CGRect frame){
+  [BILib injectToClass:[UIView class] selector:@selector(setFrame:) preprocess:^(UIView* view, CGRect frame){
     view.tag += 100;
   }];
 
@@ -283,9 +283,9 @@ typedef struct bilib_test_1024 {
 - (void)testUIViewController
 {
   __block BOOL bflag = NO;
-  [BILib injectToSelector:@selector(presentViewController:animated:completion:)
-                 forClass:[UIViewController class]
-                    preprocess:^(id target, UIViewController* vc, BOOL flag, id completion)
+  [BILib injectToClass:[UIViewController class]
+              selector:@selector(presentViewController:animated:completion:)
+            preprocess:^(id target, UIViewController* vc, BOOL flag, id completion)
   {
     NSLog(@"presentViewController:%@ animated:%d completion:%@", vc, flag, completion);
 
@@ -303,7 +303,7 @@ typedef struct bilib_test_1024 {
 
 - (void)testReturnValue
 {
-  [BILib injectToSelector:@selector(count) forClass:[Bizz class] preprocess:^(Bizz* bizz){
+  [BILib injectToClass:[Bizz class] selector:@selector(count) preprocess:^(Bizz* bizz){
     NSLog(@"preprocess");
   }];
 
@@ -319,7 +319,7 @@ typedef struct bilib_test_1024 {
 
 - (void)testReturnValueForObject
 {
-  [BILib injectToSelector:@selector(backup) forClass:[Bizz class] preprocess:^(Bizz* bizz){
+  [BILib injectToClass:[Bizz class] selector:@selector(backup) preprocess:^(Bizz* bizz){
     NSLog(@"preprocess");
   }];
 
@@ -333,7 +333,7 @@ typedef struct bilib_test_1024 {
 - (void)testForReadme
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(buttonDidPush:) forClass:[ViewController class] preprocess:^{
+  [BILib injectToClass:[ViewController class] selector:@selector(buttonDidPush:) preprocess:^{
 
     //[tracker sendEventWithCategory:@"uiAction"
                         //withAction:@"buttonDidPush"
@@ -347,7 +347,7 @@ typedef struct bilib_test_1024 {
 
   STAssertEquals(i, 1, @"i is invalid.");
 
-  [BILib injectToSelectorWithMethodName:@"buttonDidPush:" forClassName:@"ViewController" preprocess:^{
+  [BILib injectToClassWithName:@"ViewController" methodName:@"buttonDidPush:" preprocess:^{
 
     //[tracker sendEventWithCategory:@"uiAction"
                         //withAction:@"buttonDidPush"
@@ -366,7 +366,7 @@ typedef struct bilib_test_1024 {
 {
   __block NSString* str = nil;
   __block int i = 0;
-  [BILib injectToSelector:@selector(sayMessage:tag:) forClass:[Child class] preprocess:^(Child* child, NSString* message, int tag){
+  [BILib injectToClass:[Child class] selector:@selector(sayMessage:tag:) preprocess:^(Child* child, NSString* message, int tag){
     str = message;
     i = tag;
   }];
@@ -385,7 +385,7 @@ typedef struct bilib_test_1024 {
 {
   __block char bc;
   __block double bd;
-  [BILib injectToSelector:@selector(sendChar:d:) forClass:[Buzz class] preprocess:^(Buzz* buzz, char c, double d){
+  [BILib injectToClass:[Buzz class] selector:@selector(sendChar:d:) preprocess:^(Buzz* buzz, char c, double d){
     bc = c;
     bd = d;
   }];
@@ -399,7 +399,7 @@ typedef struct bilib_test_1024 {
 - (void)testStructArgument
 {
   __block CGFloat height = 0.0;
-  [BILib injectToSelector:@selector(setFrame:) forClass:[UIView class] preprocess:^(UIView* view, CGRect frame){
+  [BILib injectToClass:[UIView class] selector:@selector(setFrame:) preprocess:^(UIView* view, CGRect frame){
     NSLog(@"%@ setFarme:(%f, %f, %f, %f)", NSStringFromClass(view.class), frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
     height = frame.size.height;
   }];
@@ -417,7 +417,7 @@ typedef struct bilib_test_1024 {
 {
   __block long l14 = 0;
   __block long l24 = 0;
-  [BILib injectToSelector:@selector(sendStruct17:st2:) forClass:[Buzz class] preprocess:^(id target, bilib_test_17 st1, bilib_test_17 st2){
+  [BILib injectToClass:[Buzz class] selector:@selector(sendStruct17:st2:) preprocess:^(id target, bilib_test_17 st1, bilib_test_17 st2){
     NSLog(@"st1:(%c, %ld, %ld, %ld, %ld)", st1.c, st1.l1, st1.l2, st1.l3, st1.l4);
     NSLog(@"st2:(%c, %ld, %ld, %ld, %ld)", st2.c, st2.l1, st2.l2, st2.l3, st2.l4);
     l14 = st1.l4;
@@ -448,7 +448,7 @@ typedef struct bilib_test_1024 {
 - (void)testStruct1024Argument
 {
   __block char c = 0;
-  [BILib injectToSelector:@selector(sendStruct1024:) forClass:[Buzz class] preprocess:^(id target, bilib_test_1024 st1024){
+  [BILib injectToClass:[Buzz class] selector:@selector(sendStruct1024:) preprocess:^(id target, bilib_test_1024 st1024){
     c = st1024.c;
   }];
 

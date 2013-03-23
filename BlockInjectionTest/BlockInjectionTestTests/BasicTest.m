@@ -1,10 +1,10 @@
 //
-//  BlockInjectionTestTests.m
+//  BasicTest.m
 //
 //  Created by ToKoRo on 2013-02-28.
 //
 
-#import "BlockInjectionTestTests.h"
+#import "BasicTest.h"
 #import "BILib.h"
 
 #pragma mark - Bizz
@@ -95,7 +95,7 @@ typedef struct bilib_test_1024 {
 
 #pragma mark - TestCase
 
-@implementation BlockInjectionTestTests
+@implementation BasicTest
 
 - (void)setUp
 {

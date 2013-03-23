@@ -12,7 +12,7 @@ you can embed the code for tracking without polluting your original source code.
 ``` objective-c
 #import "BILib.h"
 
-[BILib injectToSelector:@selector(buttonDidPush:) forClass:[ViewController class] preprocess:^{
+[BILib injectToClass:[ViewController class] selector:@selector(buttonDidPush:) preprocess:^{
 
   // This code is called just before buttnDidPush:
   [tracker sendEventWithCategory:@"uiAction"
@@ -28,7 +28,7 @@ You can use NSString instead of Selector and Class.
 ``` objective-c
 #import "BILib.h"
 
-[BILib injectToSelectorWithMethodName:@"buttonDidPush:" forClassName:@"ViewController" preprocess:^{
+[BILib injectToClassWithName:@"ViewController" methodName:@"buttonDidPush:" preprocess:^{
 
   // This code is called just before buttnDidPush:
   [tracker sendEventWithCategory:@"uiAction"
@@ -44,7 +44,7 @@ You can insert a Postprocess.
 ``` objective-c
 #import "BILib.h"
 
-[BILib injectToSelector:@selector(buttonDidPush:) forClass:[ViewController class] postprocess:^{
+[BILib injectToClass:[ViewController class] selector:@selector(buttonDidPush:) postprocess:^{
 
   // This code is called just after buttnDidPush:
   [tracker sendEventWithCategory:@"uiAction"
@@ -75,7 +75,7 @@ You can use a instance method's argument in your block.
 
 // ...
 
-[BILib injectToSelector:@selector(sayMessage:) forClass:[Bizz class] preprocess:^(Bizz* bizz, NSString* message){
+[BILib injectToClass:[Bizz class] selector:@selector(sayMessage:) preprocess:^(Bizz* bizz, NSString* message){
 
   // This code is called just before buttnDidPush:
   [tracker sendEventWithCategory:@"Bizz"

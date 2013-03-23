@@ -14,33 +14,51 @@
 
 #pragma mark - Public Interface
   
-+ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class preprocess:(id)preprocess
++ (BOOL)injectToClass:(Class)class selector:(SEL)sel preprocess:(id)preprocess;
 {
   return [BILib injectToSelector:sel forClass:class preprocess:preprocess postprocess:nil];
 }
 
-+ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class postprocess:(id)postprocess
++ (BOOL)injectToClass:(Class)class selector:(SEL)sel postprocess:(id)postprocess;
 {
   return [BILib injectToSelector:sel forClass:class preprocess:nil postprocess:postprocess];
 }
 
-+ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className preprocess:(id)preprocess
++ (BOOL)injectToClassWithName:(NSString*)className methodName:(NSString*)methodName preprocess:(id)preprocess;
 {
   Class class = objc_getClass([className UTF8String]);
   SEL sel = sel_getUid([methodName UTF8String]);
-  return [BILib injectToSelector:sel forClass:class preprocess:preprocess];
+  return [BILib injectToClass:class selector:sel preprocess:preprocess];
 }
 
-+ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className postprocess:(id)postprocess
++ (BOOL)injectToClassWithName:(NSString*)className methodName:(NSString*)methodName postprocess:(id)postprocess;
 {
   Class class = objc_getClass([className UTF8String]);
   SEL sel = sel_getUid([methodName UTF8String]);
-  return [BILib injectToSelector:sel forClass:class postprocess:postprocess];
+  return [BILib injectToClass:class selector:sel postprocess:postprocess];
 }
 
 + (void)clear
 {
   [[BIItemManager sharedInstance] clear];
+}
+
++ (BOOL)replaceImplementationForClass:(Class)class selector:(SEL)sel block:(id)block
+{
+  Method method = [BILib getMethodInClass:class selector:sel];
+  if (method) {
+    if (method_setImplementation(method, imp_implementationWithBlock(block))) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
++ (BOOL)replaceImplementationForClassName:(NSString*)className methodName:(NSString*)methodName block:(id)block
+{
+  Class class = objc_getClass([className UTF8String]);
+  SEL sel = sel_getUid([methodName UTF8String]);
+  return [BILib replaceImplementationForClass:class selector:sel block:block];
 }
 
 #pragma mark - Private Methods
@@ -176,6 +194,32 @@
     };
     method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
   }
+}
+
+#pragma mark - Deprecated Methods
+
++ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class preprocess:(id)preprocess
+{
+  return [BILib injectToSelector:sel forClass:class preprocess:preprocess postprocess:nil];
+}
+
++ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class postprocess:(id)postprocess
+{
+  return [BILib injectToSelector:sel forClass:class preprocess:nil postprocess:postprocess];
+}
+
++ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className preprocess:(id)preprocess
+{
+  Class class = objc_getClass([className UTF8String]);
+  SEL sel = sel_getUid([methodName UTF8String]);
+  return [BILib injectToSelector:sel forClass:class preprocess:preprocess];
+}
+
++ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className postprocess:(id)postprocess
+{
+  Class class = objc_getClass([className UTF8String]);
+  SEL sel = sel_getUid([methodName UTF8String]);
+  return [BILib injectToSelector:sel forClass:class postprocess:postprocess];
 }
 
 @end

@@ -9,13 +9,13 @@
 #import "ClassMethodTest.h"
 #import "BILib.h"
 
-#pragma mark - Subject
+#pragma mark - SubjectForClass
 
-@interface Subject : NSObject
+@interface SubjectForClass : NSObject
 + (void)classMethod:(id)arg;
 @end 
 
-@implementation Subject
+@implementation SubjectForClass
 
 + (void)classMethod:(id)arg
 {
@@ -42,13 +42,13 @@
 - (void)testInjectToClassMethod
 {
   __block int i = 0;
-  [BILib injectToSelector:@selector(classMethod:) forClass:[Subject class] preprocess:^{
+  [BILib injectToClass:[SubjectForClass class] selector:@selector(classMethod:) preprocess:^{
     ++i;
   }];
 
   STAssertEquals(i, 0, @"i is invalid.");
 
-  [Subject classMethod:@"hello!"];
+  [SubjectForClass classMethod:@"hello!"];
 
   STAssertEquals(i, 1, @"i is invalid.");
 }

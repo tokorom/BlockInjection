@@ -8,6 +8,8 @@
 
 @interface BIItemManager : NSObject
 
+@property (weak) BIItem* currentItem;
+
 + (BIItemManager*)sharedInstance;
 
 - (BIItem*)itemForMethodName:(NSString*)methodName forClass:(Class)class;

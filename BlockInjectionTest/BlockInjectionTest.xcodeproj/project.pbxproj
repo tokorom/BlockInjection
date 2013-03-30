@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0601289416FD671400603736 /* ClassMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0601289316FD671400603736 /* ClassMethodTest.m */; };
 		06162C1016FDECB000213ACD /* ReplaceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06162C0F16FDECB000213ACD /* ReplaceTest.m */; };
+		06162C1316FF350900213ACD /* RegexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06162C1216FF350900213ACD /* RegexTest.m */; };
 		061D0EEC16E48F460041268A /* BIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEB16E48F460041268A /* BIItem.m */; };
 		061D0EEF16E4A0660041268A /* BIItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEE16E4A0660041268A /* BIItemManager.m */; };
 		06584ED116DEFA6000CB2D68 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */; };
@@ -25,6 +26,8 @@
 		0601289316FD671400603736 /* ClassMethodTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMethodTest.m; sourceTree = "<group>"; };
 		06162C0E16FDECB000213ACD /* ReplaceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplaceTest.h; sourceTree = "<group>"; };
 		06162C0F16FDECB000213ACD /* ReplaceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplaceTest.m; sourceTree = "<group>"; };
+		06162C1116FF350900213ACD /* RegexTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexTest.h; sourceTree = "<group>"; };
+		06162C1216FF350900213ACD /* RegexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexTest.m; sourceTree = "<group>"; };
 		061D0EEA16E48F460041268A /* BIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItem.h; sourceTree = "<group>"; };
 		061D0EEB16E48F460041268A /* BIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIItem.m; sourceTree = "<group>"; };
 		061D0EED16E4A0660041268A /* BIItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItemManager.h; sourceTree = "<group>"; };
@@ -98,6 +101,8 @@
 				06162C0E16FDECB000213ACD /* ReplaceTest.h */,
 				06162C0F16FDECB000213ACD /* ReplaceTest.m */,
 				06584ED716DEFA6000CB2D68 /* Supporting Files */,
+				06162C1116FF350900213ACD /* RegexTest.h */,
+				06162C1216FF350900213ACD /* RegexTest.m */,
 			);
 			path = BlockInjectionTestTests;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				06941C1016E7344800EDAA36 /* BILibArg.m in Sources */,
 				0601289416FD671400603736 /* ClassMethodTest.m in Sources */,
 				06162C1016FDECB000213ACD /* ReplaceTest.m in Sources */,
+				06162C1316FF350900213ACD /* RegexTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,11 +7,14 @@
 @interface BIItem : NSObject
 
 @property (assign) Class targetClass;
+@property (assign) SEL targetSel;
 @property (assign) SEL originalSel;
 @property (assign) void* originalMethod;
 @property (strong) NSMethodSignature* signature;
 @property (assign) unsigned int numberOfArguments;
 @property (assign) BOOL isClassMethod;
+
+- (NSString*)prettyFunction;
 
 - (void)addPreprocessForSelector:(SEL)sel;
 - (void)addPostprocessForSelector:(SEL)sel;

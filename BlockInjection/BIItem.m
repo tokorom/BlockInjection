@@ -13,6 +13,8 @@
 
 @implementation BIItem
 
+#pragma mark - Lifecycle
+
 - (id)init
 {
   if ((self = [super init])) {
@@ -20,6 +22,17 @@
     self.postprocesses = [NSMutableArray array];
   }
   return self;
+}
+
+#pragma mark - Public Interface
+
+- (NSString*)prettyFunction
+{
+  return [NSString stringWithFormat:@"%@[%@ %@]",
+    self.isClassMethod ? @"+" : @"-",
+    NSStringFromClass(self.targetClass),
+    NSStringFromSelector(self.targetSel)
+  ];
 }
 
 - (void)addPreprocessForSelector:(SEL)sel

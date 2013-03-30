@@ -14,6 +14,12 @@
 
 #pragma mark - Public Interface
   
++ (NSString*)prettyFunction
+{
+  BIItem* item = [[BIItemManager sharedInstance] currentItem];
+  return [item prettyFunction];
+}
+
 + (BOOL)injectToClass:(Class)class selector:(SEL)sel preprocess:(id)preprocess;
 {
   return [BILib injectToSelector:sel forClass:class preprocess:preprocess postprocess:nil];
@@ -36,6 +42,58 @@
   Class class = objc_getClass([className UTF8String]);
   SEL sel = sel_getUid([methodName UTF8String]);
   return [BILib injectToClass:class selector:sel postprocess:postprocess];
+}
+
++ (BOOL)injectToClassWithNames:(NSArray*)classNames methodNames:(NSArray*)methodNames preprocess:(id)preprocess
+{
+  BOOL failed = NO;
+  for (NSString* className in classNames) {
+    for (NSString* methodName in methodNames) {
+      failed |= ![BILib injectToClassWithName:className methodName:methodName preprocess:preprocess];
+    }
+  }
+  return !failed;
+}
+
++ (BOOL)injectToClassWithNames:(NSArray*)classNames methodNames:(NSArray*)methodNames postprocess:(id)postprocess
+{
+  BOOL failed = NO;
+  for (NSString* className in classNames) {
+    for (NSString* methodName in methodNames) {
+      failed |= ![BILib injectToClassWithName:className methodName:methodName postprocess:postprocess];
+    }
+  }
+  return !failed;
+}
+
++ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess
+{
+  BOOL failed = NO;
+  NSArray* matchClasses = [BILib classesWithRegex:classNameRegex];
+  for (NSValue* classValue in matchClasses) {
+    Class class = [classValue pointerValue];
+    NSArray* matchSelectors = [BILib selectorsWithRegex:methodNameRegex forClass:class];
+    for (NSValue* selValue in matchSelectors) {
+      SEL sel = [selValue pointerValue];
+      failed |= ![BILib injectToClass:class selector:sel preprocess:preprocess];
+    }
+  }
+  return !failed;
+}
+
++ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex postprocess:(id)postprocess
+{
+  BOOL failed = NO;
+  NSArray* matchClasses = [BILib classesWithRegex:classNameRegex];
+  for (NSValue* classValue in matchClasses) {
+    Class class = [classValue pointerValue];
+    NSArray* matchSelectors = [BILib selectorsWithRegex:methodNameRegex forClass:class];
+    for (NSValue* selValue in matchSelectors) {
+      SEL sel = [selValue pointerValue];
+      failed |= ![BILib injectToClass:class selector:sel postprocess:postprocess];
+    }
+  }
+  return !failed;
 }
 
 + (void)clear
@@ -86,7 +144,9 @@
   Method originalMethod = [BILib getMethodInClass:class selector:sel isClassMethod:&isClassMethod];
   Method savedMethod = [BILib getMethodInClass:class selector:saveSel];
 
-  if (!savedMethod && originalMethod) {
+  if (!originalMethod) return NO;
+
+  if (!savedMethod) {
     // Save original method
     [BILib addMethodToClass:class selector:saveSel imp:method_getImplementation(originalMethod) typeEncoding:method_getTypeEncoding(originalMethod) isClassMethod:isClassMethod];
   }
@@ -96,6 +156,7 @@
   if (!item) {
     item = [BIItem new];
     item.targetClass = class;
+    item.targetSel = sel;
     item.originalSel = saveSel;
     item.originalMethod = originalMethod;
     item.numberOfArguments = method_getNumberOfArguments(originalMethod) - 2;
@@ -168,6 +229,7 @@
 {
   if (item.signature) {
     id replaceBlock = ^(id target, ...){
+      [[BIItemManager sharedInstance] setCurrentItem:item];
       void* retp = NULL;
       NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:item.signature];
       [invocation setTarget:target];
@@ -194,6 +256,56 @@
     };
     method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
   }
+}
+
++ (NSArray*)classesWithRegex:(NSRegularExpression*)regex
+{
+  @autoreleasepool {
+    NSMutableArray* retClasses = [NSMutableArray array];
+    int numClasses;
+    numClasses = objc_getClassList(NULL, 0);
+    if (0 < numClasses) {
+      Class* classes = (Class*)malloc(sizeof(Class) * numClasses);
+      objc_getClassList(classes, numClasses);
+      for (int i = 0; i < numClasses; ++i) {
+        Class class = classes[i];
+        NSString* className = NSStringFromClass(class);
+        NSTextCheckingResult* match = [regex firstMatchInString:className options:0 range:NSMakeRange(0, className.length)];
+        if (0 < match.numberOfRanges) {
+          [retClasses addObject:[NSValue valueWithPointer:(void*)class]];
+        }
+      }
+      free(classes);
+    }
+    return retClasses;
+  }
+}
+
++ (NSArray*)selectorsWithRegex:(NSRegularExpression*)regex forClass:(Class)class
+{
+  @autoreleasepool {
+    NSArray* instanceMethods = [BILib _selectorsWithRegex:regex forClass:class];
+    NSArray* classMethods = [BILib _selectorsWithRegex:regex forClass:object_getClass(class)];
+    NSMutableArray* retSelectors = [NSMutableArray arrayWithArray:instanceMethods];
+    [retSelectors addObjectsFromArray:classMethods];
+    return retSelectors;
+  }
+}
+
++ (NSArray*)_selectorsWithRegex:(NSRegularExpression*)regex forClass:(Class)class
+{
+  NSMutableArray* retSelectors = [NSMutableArray array];
+  unsigned int count;
+  Method* methods = class_copyMethodList(class, &count);
+  for (int i = 0; i < count; ++i) {
+    SEL sel = method_getName(methods[i]);
+    NSString* methodName = NSStringFromSelector(sel);
+    NSTextCheckingResult* match = [regex firstMatchInString:methodName options:0 range:NSMakeRange(0, methodName.length)];
+    if (0 < match.numberOfRanges) {
+      [retSelectors addObject:[NSValue valueWithPointer:(void*)sel]];
+    }
+  }
+  return retSelectors;
 }
 
 #pragma mark - Deprecated Methods

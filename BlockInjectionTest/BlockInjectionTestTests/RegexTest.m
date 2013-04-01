@@ -221,4 +221,22 @@
   STAssertEquals(1, 1, nil);
 }
 
+- (void)testRegexWithMacro
+{
+  __block int i = 0;
+  [BILib injectToClassWithNameRegex:BIRegex(@"^SubjectForRegex$") methodNameRegex:BIRegex(@"^instance.*") preprocess:^{
+    ++i;
+  }];
+
+  STAssertEquals(i, 0, @"i is invalid.");
+
+  [[SubjectForRegex new] instanceMethod:@"hello!"];
+
+  STAssertEquals(i, 1, @"i is invalid.");
+
+  [[SubjectForRegex new] instanceMethod2];
+
+  STAssertEquals(i, 2, @"i is invalid.");
+}
+
 @end

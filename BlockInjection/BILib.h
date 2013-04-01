@@ -4,6 +4,8 @@
 //  Created by ToKoRo on 2013-02-27.
 //
 
+#pragma mark - BILib
+
 @interface BILib : NSObject
 
 + (NSString*)prettyFunction;
@@ -24,9 +26,16 @@
 + (BOOL)replaceImplementationForClass:(Class)class selector:(SEL)sel block:(id)block;
 + (BOOL)replaceImplementationForClassName:(NSString*)className methodName:(NSString*)methodName block:(id)block;
 
+/**
+ * Deprecated
+ */
 + (BOOL)injectToSelector:(SEL)sel forClass:(Class)class preprocess:(id)preprocess __deprecated;
 + (BOOL)injectToSelector:(SEL)sel forClass:(Class)class postprocess:(id)postprocess __deprecated;
 + (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className preprocess:(id)preprocess __deprecated;
 + (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className postprocess:(id)postprocess __deprecated;
 
 @end
+
+#pragma mark - Inline methods
+
+NSRegularExpression* BIRegex(NSString* regexString);

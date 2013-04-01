@@ -144,7 +144,10 @@
   Method originalMethod = [BILib getMethodInClass:class selector:sel isClassMethod:&isClassMethod];
   Method savedMethod = [BILib getMethodInClass:class selector:saveSel];
 
-  if (!originalMethod) return NO;
+  if (!originalMethod) {
+    NSLog(@"BILib: [%@ %@] is not found.", NSStringFromClass(class), NSStringFromSelector(sel));
+    return NO;
+  }
 
   if (!savedMethod) {
     // Save original method
@@ -332,6 +335,14 @@
   Class class = objc_getClass([className UTF8String]);
   SEL sel = sel_getUid([methodName UTF8String]);
   return [BILib injectToSelector:sel forClass:class postprocess:postprocess];
+}
+
+#pragma mark - Inline methods
+
+inline NSRegularExpression* BIRegex(NSString* regexString)
+{
+  NSError* error = nil;
+  return [NSRegularExpression regularExpressionWithPattern:regexString options:0 error:&error];
 }
 
 @end

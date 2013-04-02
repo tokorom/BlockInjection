@@ -161,7 +161,7 @@
 {
   NSError* error = nil;
   NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^SubjectForRegex$" options:0 error:&error];
-  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^instance.*" options:0 error:&error];
+  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^instance.*$" options:0 error:&error];
 
   __block int i = 0;
   [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{
@@ -182,8 +182,8 @@
 - (void)testRegexWithPostprocess
 {
   NSError* error = nil;
-  NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^SubjectForRegex.*" options:0 error:&error];
-  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^instance.*" options:0 error:&error];
+  NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^SubjectForRegex.*$" options:0 error:&error];
+  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^instance.*$" options:0 error:&error];
 
   __block int i = 0;
   [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex postprocess:^{
@@ -208,8 +208,8 @@
 - (void)testRegexWithUIView
 {
   NSError* error = nil;
-  NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"UIView" options:0 error:&error];
-  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^set.*" options:0 error:&error];
+  NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^UIView$" options:0 error:&error];
+  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^set.*$" options:0 error:&error];
 
   [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex postprocess:^{
     NSLog(@"%@", [BILib prettyFunction]);
@@ -224,7 +224,7 @@
 - (void)testRegexWithMacro
 {
   __block int i = 0;
-  [BILib injectToClassWithNameRegex:BIRegex(@"^SubjectForRegex$") methodNameRegex:BIRegex(@"^instance.*") preprocess:^{
+  [BILib injectToClassWithNameRegex:BIRegex(@"^SubjectForRegex$") methodNameRegex:BIRegex(@"^instance.*$") preprocess:^{
     ++i;
   }];
 

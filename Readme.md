@@ -88,3 +88,15 @@ You can use a instance method's argument in your block.
 // ...
 ```
 
+You can use the regex for specifying the class names and the method names.
+
+``` objective-c
+#import "BILib.h"
+
+[BILib injectToClassWithNameRegex:BIRegex(@"^UIView$") methodNameRegex:BIRegex(@"^set.*$") preprocess:^{
+
+  // This code is called just before all UIView's setters and log the actual method name
+  NSLog(@"%@", [BILib prettyFunction]);
+
+}];
+```

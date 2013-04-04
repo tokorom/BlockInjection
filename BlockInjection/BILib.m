@@ -7,7 +7,6 @@
 #import "BILib.h"
 #import "BIItem.h"
 #import "BIItemManager.h"
-#import "BILibArg.h"
 #import <objc/runtime.h>
 
 @implementation BILib
@@ -94,6 +93,12 @@
     }
   }
   return !failed;
+}
+
++ (void)skipAfterProcessesWithReturnValue:(void*)pReturnValue
+{
+  BIItem* item = [[BIItemManager sharedInstance] currentItem];
+  [item skipAfterProcessesWithReturnValue:pReturnValue];
 }
 
 + (void)clear
@@ -233,28 +238,10 @@
   if (item.signature) {
     id replaceBlock = ^(id target, ...){
       [[BIItemManager sharedInstance] setCurrentItem:item];
-      void* retp = NULL;
-      NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:item.signature];
-      [invocation setTarget:target];
-      // Set arguments
       va_list argp;
       va_start(argp, target);
-      [BILibArg sendArgumentsToInvocation:invocation arguments:&argp numberOfArguments:item.numberOfArguments signature:item.signature];
+      void* retp = [item invokeWithTarget:target args:&argp];
       va_end(argp);
-      // Preprocess
-      [item invokePreprocessWithInvocation:invocation];
-      // Original
-      [invocation setSelector:item.originalSel];
-      [invocation invoke];
-      // Get return value
-      NSUInteger returnLength = [[invocation methodSignature] methodReturnLength];
-      if (returnLength) {
-        void* result = __builtin_alloca(returnLength);
-        [invocation getReturnValue:result];
-        retp = result;
-      }
-      // Postprocess
-      [item invokePostprocessWithInvocation:invocation];
       return retp ? *(void**)retp : NULL;
     };
     method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));

@@ -21,6 +21,8 @@
 + (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess;
 + (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex postprocess:(id)postprocess;
 
++ (void)skipAfterProcessesWithReturnValue:(void*)pReturnValue;
+
 + (void)clear;
 
 + (BOOL)replaceImplementationForClass:(Class)class selector:(SEL)sel block:(id)block;

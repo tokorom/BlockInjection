@@ -101,6 +101,21 @@ You can use the regex for specifying the class names and the method names.
 }];
 ```
 
+You can skip after processes with return value.
+
+``` objective-c
+#import "BILib.h"
+
+[BILib injectToClassWithName:@"Sample" methodName:@"intValue" preprocess:^{
+
+  int ret = 10;
+  // skip after processes (orignal method and after preprocesses and postprocesses)
+  [BILib skipAfterProcessesWithReturnValue:&ret];
+
+}];
+
+```
+
 ## Getting Started - Installing BlockInjection
 
 Please choose a way you prefer.

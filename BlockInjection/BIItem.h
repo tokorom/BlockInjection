@@ -16,12 +16,15 @@
 
 - (NSString*)prettyFunction;
 
+- (void)prepareWithInvocation:(NSInvocation*)invocation;
+
 - (void)addPreprocessForSelector:(SEL)sel;
 - (void)addPostprocessForSelector:(SEL)sel;
 - (NSUInteger)numberOfPreprocess;
 - (NSUInteger)numberOfPostprocess;
 
-- (void)invokePreprocessWithInvocation:(NSInvocation*)invocation;
-- (void)invokePostprocessWithInvocation:(NSInvocation*)invocation;
+- (void*)invokeWithTarget:(id)target args:(va_list*)args;
+
+- (void)skipAfterProcessesWithReturnValue:(void*)pReturnValue;
 
 @end

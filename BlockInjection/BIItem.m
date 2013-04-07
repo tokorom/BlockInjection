@@ -80,7 +80,8 @@
   void* result = NULL;
   NSUInteger returnLength = [[invocation methodSignature] methodReturnLength];
   if (returnLength) {
-    result = __builtin_alloca(returnLength);
+    //result = __builtin_alloca(returnLength);
+    result = malloc(returnLength);
   }
   // Preprocess
   [self prepareWithInvocation:invocation];
@@ -90,7 +91,6 @@
     [invocation setSelector:self.originalSel];
     [invocation invoke];
     // Get return value
-    NSUInteger returnLength = [[invocation methodSignature] methodReturnLength];
     if (returnLength && result) {
       [invocation getReturnValue:result];
     }

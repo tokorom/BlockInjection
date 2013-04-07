@@ -20,6 +20,7 @@
 		06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EEB16DEFAF800CB2D68 /* BILib.m */; };
 		0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0685AD09170DCB8D0082AD69 /* SkippingTest.m */; };
 		06941C1016E7344800EDAA36 /* BILibArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 06941C0F16E7344800EDAA36 /* BILibArg.m */; };
+		06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC319817117EBD0017A9CF /* ReturnValueTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		0685AD09170DCB8D0082AD69 /* SkippingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkippingTest.m; sourceTree = "<group>"; };
 		06941C0E16E7344800EDAA36 /* BILibArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibArg.h; sourceTree = "<group>"; };
 		06941C0F16E7344800EDAA36 /* BILibArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILibArg.m; sourceTree = "<group>"; };
+		06BC319717117EBD0017A9CF /* ReturnValueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValueTest.h; sourceTree = "<group>"; };
+		06BC319817117EBD0017A9CF /* ReturnValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnValueTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 				06162C1216FF350900213ACD /* RegexTest.m */,
 				0685AD08170DCB8D0082AD69 /* SkippingTest.h */,
 				0685AD09170DCB8D0082AD69 /* SkippingTest.m */,
+				06BC319717117EBD0017A9CF /* ReturnValueTest.h */,
+				06BC319817117EBD0017A9CF /* ReturnValueTest.m */,
 				06584ED716DEFA6000CB2D68 /* Supporting Files */,
 			);
 			path = BlockInjectionTests;
@@ -226,6 +231,7 @@
 				06162C1016FDECB000213ACD /* ReplaceTest.m in Sources */,
 				06162C1316FF350900213ACD /* RegexTest.m in Sources */,
 				0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */,
+				06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

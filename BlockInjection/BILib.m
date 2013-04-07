@@ -9,6 +9,25 @@
 #import "BIItemManager.h"
 #import <objc/runtime.h>
 
+#define REPLACEBLOCK_FOR_VOID \
+  ^(id target, ...){ \
+    [[BIItemManager sharedInstance] setCurrentItem:item]; \
+    va_list argp; \
+    va_start(argp, target); \
+    [item invokeWithTarget:target args:&argp]; \
+    va_end(argp); \
+  }
+
+#define REPLACEBLOCK_FOR(type) \
+  ^(id target, ...){ \
+    [[BIItemManager sharedInstance] setCurrentItem:item]; \
+    va_list argp; \
+    va_start(argp, target); \
+    void* retp = [item invokeWithTarget:target args:&argp]; \
+    va_end(argp); \
+    return *(type*)retp; \
+  }
+
 @implementation BILib
 
 #pragma mark - Public Interface
@@ -236,14 +255,46 @@
 + (void)replaceImplementationWithItem:(BIItem*)item
 {
   if (item.signature) {
-    id replaceBlock = ^(id target, ...){
-      [[BIItemManager sharedInstance] setCurrentItem:item];
-      va_list argp;
-      va_start(argp, target);
-      void* retp = [item invokeWithTarget:target args:&argp];
-      va_end(argp);
-      return retp ? *(void**)retp : NULL;
-    };
+    id replaceBlock;
+    const char* returnType = [item.signature methodReturnType];
+  NSLog(@"##### returnType: %s", returnType);
+    if (NULL == returnType || 0 == strlen(returnType) || 'v' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR_VOID; }
+    else if ('c' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(char); }
+    else if ('i' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(int); }
+    else if ('s' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(short); }
+    else if ('l' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(long); }
+    else if ('q' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(long long); }
+    else if ('C' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned char); }
+    else if ('I' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned int); }
+    else if ('S' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned short); }
+    else if ('L' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned long); }
+    else if ('Q' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned long long); }
+    else if ('f' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(float); }
+    else if ('d' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(double); }
+    else if ('B' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(bool); }
+    else { replaceBlock = REPLACEBLOCK_FOR(int); }
+
+    /*
+    NSGetSizeAndAlignment(returnType, &returnLength, &alignment);
+    NSLog(@"##### %s : %d", returnType, returnLength);
+    switch (returnLength) {
+      case 0: { replaceBlock = ^(id target, ...){
+        [[BIItemManager sharedInstance] setCurrentItem:item];
+        va_list argp;
+        va_start(argp, target);
+        [item invokeWithTarget:target args:&argp];
+        va_end(argp);
+      }; } break;
+      default: { replaceBlock = ^(id target, ...){
+        [[BIItemManager sharedInstance] setCurrentItem:item];
+        va_list argp;
+        va_start(argp, target);
+        void* retp = [item invokeWithTarget:target args:&argp];
+        va_end(argp);
+        return *(int*)retp;
+      }; } break;
+    }
+    */
     method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
   }
 }

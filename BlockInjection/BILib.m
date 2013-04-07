@@ -290,28 +290,6 @@
         default: { replaceBlock = REPLACEBLOCK_FOR(int); } break;
       }
     }
-
-    /*
-    NSGetSizeAndAlignment(returnType, &returnLength, &alignment);
-    NSLog(@"##### %s : %d", returnType, returnLength);
-    switch (returnLength) {
-      case 0: { replaceBlock = ^(id target, ...){
-        [[BIItemManager sharedInstance] setCurrentItem:item];
-        va_list argp;
-        va_start(argp, target);
-        [item invokeWithTarget:target args:&argp];
-        va_end(argp);
-      }; } break;
-      default: { replaceBlock = ^(id target, ...){
-        [[BIItemManager sharedInstance] setCurrentItem:item];
-        va_list argp;
-        va_start(argp, target);
-        void* retp = [item invokeWithTarget:target args:&argp];
-        va_end(argp);
-        return *(int*)retp;
-      }; } break;
-    }
-    */
     method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
   }
 }

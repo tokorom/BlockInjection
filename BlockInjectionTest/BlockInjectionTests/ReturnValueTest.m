@@ -9,6 +9,42 @@
 #import "ReturnValueTest.h"
 #import "BILib.h"
 
+static int ia[2] = {1, 2};
+
+#pragma mark - ClassForReturnValue
+
+@interface ClassForReturnValue : NSObject
+@end
+
+@implementation ClassForReturnValue
+- (const int)ci {
+  return 100;
+}
+- (const char*)constChars {
+  return "ci";
+}
+- (double)doubleValue {
+  return 99.99;
+}
+- (bool)boolValue {
+  return true;
+}
+- (char)charValue {
+  return 'c';
+}
+- (int*)arrayValue {
+  return ia;
+}
+- (Class)classValue {
+  return NSClassFromString(@"UIView");
+}
+- (SEL)selValue {
+  return @selector(tag);
+}
+@end
+
+#pragma mark - Private Methods
+
 @implementation ReturnValueTest
 
 - (void)setUp
@@ -100,6 +136,151 @@
 
   STAssertTrue(success, @"success is invalid.");
   STAssertEquals(alpha, (CGFloat)0.8, @"alpha is invalid.");
+}
+
+- (void)testReturnConstInt
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"ci" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  const int ret = [[ClassForReturnValue new] ci];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertEquals(ret, (const int)100, @"ret is invalid.");
+}
+
+- (void)testReturnConstChars
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"constChars" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  const char* ret = [[ClassForReturnValue new] constChars];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertEquals(ret[0], (char)'c', @"ret is invalid.");
+  STAssertEquals(ret[1], (char)'i', @"ret is invalid.");
+}
+
+- (void)testReturnDouble
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"doubleValue" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  double ret = [[ClassForReturnValue new] doubleValue];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertEquals(ret, (double)99.99, @"ret is invalid.");
+}
+
+- (void)testReturnCppBool
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"boolValue" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  bool ret = [[ClassForReturnValue new] boolValue];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertEquals(ret, (bool)true, @"ret is invalid.");
+}
+
+- (void)testReturnChar
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"charValue" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  char ret = [[ClassForReturnValue new] charValue];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertEquals(ret, (char)'c', @"ret is invalid.");
+}
+
+- (void)testReturnArray
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"arrayValue" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  int* ret = [[ClassForReturnValue new] arrayValue];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertEquals(ret[0], (int)1, @"ret is invalid.");
+  STAssertEquals(ret[1], (int)2, @"ret is invalid.");
+}
+
+- (void)testReturnClass
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"classValue" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  Class ret = [[ClassForReturnValue new] classValue];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertTrue([@"UIView" isEqualToString:NSStringFromClass(ret)], @"ret is invalid.");
+}
+
+- (void)testReturnSelector
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"selValue" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+  }];
+
+  SEL ret = [[ClassForReturnValue new] selValue];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertTrue([@"tag" isEqualToString:NSStringFromSelector(ret)], @"ret is invalid.");
+}
+
+- (void)testReturnCGRect
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"UIView" methodName:@"frame" preprocess:^(UIView* view){
+    if ([view isKindOfClass:[UIView class]]) {
+      success = YES;
+    }
+    return CGRectMake(0,0,0,0);
+  }];
+
+  UIView* view = [UIView new];
+  view.frame = CGRectMake(1.0, 2.0, 3.0, 4.0);
+
+  CGRect frame = view.frame;
+
+  STAssertTrue(success, @"success is invalid.");
+
+  STAssertEquals(frame.origin.x, (CGFloat)1.0, @"x is invalid.");
+  STAssertEquals(frame.origin.y, (CGFloat)2.0, @"y is invalid.");
+  STAssertEquals(frame.size.width, (CGFloat)3.0, @"w is invalid.");
+  STAssertEquals(frame.size.height, (CGFloat)4.0, @"h is invalid.");
 }
 
 @end

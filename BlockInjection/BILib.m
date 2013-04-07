@@ -258,21 +258,38 @@
     id replaceBlock;
     const char* returnType = [item.signature methodReturnType];
   NSLog(@"##### returnType: %s", returnType);
-    if (NULL == returnType || 0 == strlen(returnType) || 'v' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR_VOID; }
-    else if ('c' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(char); }
-    else if ('i' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(int); }
-    else if ('s' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(short); }
-    else if ('l' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(long); }
-    else if ('q' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(long long); }
-    else if ('C' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned char); }
-    else if ('I' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned int); }
-    else if ('S' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned short); }
-    else if ('L' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned long); }
-    else if ('Q' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(unsigned long long); }
-    else if ('f' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(float); }
-    else if ('d' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(double); }
-    else if ('B' == returnType[0]) { replaceBlock = REPLACEBLOCK_FOR(bool); }
-    else { replaceBlock = REPLACEBLOCK_FOR(int); }
+    if (NULL == returnType || 0 == strlen(returnType)) {
+      replaceBlock = REPLACEBLOCK_FOR_VOID;
+    } else {
+      char prefix = returnType[0];
+      char type = returnType[strlen(returnType) - 1];
+      if ('^' == prefix || '{' == prefix) {
+        type = prefix;
+      }
+      switch (type) {
+        case 'v': { replaceBlock = REPLACEBLOCK_FOR_VOID; } break;
+        //case 'c': { replaceBlock = REPLACEBLOCK_FOR(char); } break;
+        //case 'i': { replaceBlock = REPLACEBLOCK_FOR(int); } break;
+        //case 's': { replaceBlock = REPLACEBLOCK_FOR(short); } break;
+        //case 'l': { replaceBlock = REPLACEBLOCK_FOR(long); } break;
+        //case 'q': { replaceBlock = REPLACEBLOCK_FOR(long long); } break;
+        //case 'C': { replaceBlock = REPLACEBLOCK_FOR(unsigned char); } break;
+        //case 'I': { replaceBlock = REPLACEBLOCK_FOR(unsigned int); } break;
+        //case 'S': { replaceBlock = REPLACEBLOCK_FOR(unsigned short); } break;
+        //case 'L': { replaceBlock = REPLACEBLOCK_FOR(unsigned long); } break;
+        //case 'Q': { replaceBlock = REPLACEBLOCK_FOR(unsigned long long); } break;
+        case 'f': { replaceBlock = REPLACEBLOCK_FOR(float); } break;
+        case 'd': { replaceBlock = REPLACEBLOCK_FOR(double); } break;
+        //case 'B': { replaceBlock = REPLACEBLOCK_FOR(bool); } break;
+        //case '*': { replaceBlock = REPLACEBLOCK_FOR(void*); } break;
+        //case '@': { replaceBlock = REPLACEBLOCK_FOR(void*); } break;
+        //case '#': { replaceBlock = REPLACEBLOCK_FOR(Class); } break;
+        //case ':': { replaceBlock = REPLACEBLOCK_FOR(SEL); } break;
+        case '{': { replaceBlock = REPLACEBLOCK_FOR(CGRect); } break;
+        //case '^': { replaceBlock = REPLACEBLOCK_FOR(int*); } break;
+        default: { replaceBlock = REPLACEBLOCK_FOR(int); } break;
+      }
+    }
 
     /*
     NSGetSizeAndAlignment(returnType, &returnLength, &alignment);

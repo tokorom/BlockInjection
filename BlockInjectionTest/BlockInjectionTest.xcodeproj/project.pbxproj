@@ -20,6 +20,7 @@
 		06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EEB16DEFAF800CB2D68 /* BILib.m */; };
 		0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0685AD09170DCB8D0082AD69 /* SkippingTest.m */; };
 		06941C1016E7344800EDAA36 /* BILibArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 06941C0F16E7344800EDAA36 /* BILibArg.m */; };
+		06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC319817117EBD0017A9CF /* ReturnValueTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,9 +37,9 @@
 		06584EB216DEFA6000CB2D68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06584EB416DEFA6000CB2D68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06584EB616DEFA6000CB2D68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockInjectionTestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BlockInjectionTestTests.octest; path = BlockInjectionTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		06584ED816DEFA6000CB2D68 /* BlockInjectionTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockInjectionTestTests-Info.plist"; sourceTree = "<group>"; };
+		06584ED816DEFA6000CB2D68 /* BlockInjectionTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockInjectionTests-Info.plist"; sourceTree = "<group>"; };
 		06584EDA16DEFA6000CB2D68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06584EDC16DEFA6000CB2D68 /* BasicTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicTest.h; sourceTree = "<group>"; };
 		06584EDD16DEFA6000CB2D68 /* BasicTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicTest.m; sourceTree = "<group>"; };
@@ -49,6 +50,8 @@
 		0685AD09170DCB8D0082AD69 /* SkippingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkippingTest.m; sourceTree = "<group>"; };
 		06941C0E16E7344800EDAA36 /* BILibArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibArg.h; sourceTree = "<group>"; };
 		06941C0F16E7344800EDAA36 /* BILibArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILibArg.m; sourceTree = "<group>"; };
+		06BC319717117EBD0017A9CF /* ReturnValueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValueTest.h; sourceTree = "<group>"; };
+		06BC319817117EBD0017A9CF /* ReturnValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnValueTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				06584EE716DEFAF800CB2D68 /* BlockInjection */,
-				06584ED616DEFA6000CB2D68 /* BlockInjectionTestTests */,
+				06584ED616DEFA6000CB2D68 /* BlockInjectionTests */,
 				06584EB116DEFA6000CB2D68 /* Frameworks */,
 				06584EB016DEFA6000CB2D68 /* Products */,
 			);
@@ -94,7 +97,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		06584ED616DEFA6000CB2D68 /* BlockInjectionTestTests */ = {
+		06584ED616DEFA6000CB2D68 /* BlockInjectionTests */ = {
 			isa = PBXGroup;
 			children = (
 				06584EDC16DEFA6000CB2D68 /* BasicTest.h */,
@@ -107,16 +110,18 @@
 				06162C1216FF350900213ACD /* RegexTest.m */,
 				0685AD08170DCB8D0082AD69 /* SkippingTest.h */,
 				0685AD09170DCB8D0082AD69 /* SkippingTest.m */,
+				06BC319717117EBD0017A9CF /* ReturnValueTest.h */,
+				06BC319817117EBD0017A9CF /* ReturnValueTest.m */,
 				06584ED716DEFA6000CB2D68 /* Supporting Files */,
 			);
-			path = BlockInjectionTestTests;
+			path = BlockInjectionTests;
 			sourceTree = "<group>";
 		};
 		06584ED716DEFA6000CB2D68 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				06584EF116DEFE7300CB2D68 /* BlockInjectionTest-Prefix.pch */,
-				06584ED816DEFA6000CB2D68 /* BlockInjectionTestTests-Info.plist */,
+				06584ED816DEFA6000CB2D68 /* BlockInjectionTests-Info.plist */,
 				06584ED916DEFA6000CB2D68 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -141,9 +146,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		06584ECE16DEFA6000CB2D68 /* BlockInjectionTestTests */ = {
+		06584ECE16DEFA6000CB2D68 /* BlockInjectionTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTestTests" */;
+			buildConfigurationList = 06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTests" */;
 			buildPhases = (
 				06584ECA16DEFA6000CB2D68 /* Sources */,
 				06584ECB16DEFA6000CB2D68 /* Frameworks */,
@@ -154,7 +159,7 @@
 			);
 			dependencies = (
 			);
-			name = BlockInjectionTestTests;
+			name = BlockInjectionTests;
 			productName = BlockInjectionTestTests;
 			productReference = 06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -180,7 +185,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				06584ECE16DEFA6000CB2D68 /* BlockInjectionTestTests */,
+				06584ECE16DEFA6000CB2D68 /* BlockInjectionTests */,
 			);
 		};
 /* End PBXProject section */
@@ -226,6 +231,7 @@
 				06162C1016FDECB000213ACD /* ReplaceTest.m in Sources */,
 				06162C1316FF350900213ACD /* RegexTest.m in Sources */,
 				0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */,
+				06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +316,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlockInjectionTest-Prefix.pch";
-				INFOPLIST_FILE = "BlockInjectionTestTests/BlockInjectionTestTests-Info.plist";
+				INFOPLIST_FILE = "BlockInjectionTests/BlockInjectionTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -327,7 +333,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlockInjectionTest-Prefix.pch";
-				INFOPLIST_FILE = "BlockInjectionTestTests/BlockInjectionTestTests-Info.plist";
+				INFOPLIST_FILE = "BlockInjectionTests/BlockInjectionTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -346,7 +352,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTestTests" */ = {
+		06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				06584EE516DEFA6000CB2D68 /* Debug */,

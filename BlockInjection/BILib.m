@@ -8,6 +8,54 @@
 #import "BIItem.h"
 #import "BIItemManager.h"
 #import <objc/runtime.h>
+#import "BILibDummyStruct.h"
+
+#define REPLACEBLOCK_FOR_VOID \
+  ^(id target, ...){ \
+    [[BIItemManager sharedInstance] setCurrentItem:item]; \
+    va_list argp; \
+    va_start(argp, target); \
+    [item invokeWithTarget:target args:&argp]; \
+    va_end(argp); \
+  }
+
+#define REPLACEBLOCK_FOR(type) \
+  ^(id target, ...){ \
+    [[BIItemManager sharedInstance] setCurrentItem:item]; \
+    va_list argp; \
+    va_start(argp, target); \
+    void* retp = [item invokeWithTarget:target args:&argp]; \
+    va_end(argp); \
+    return *(type*)retp; \
+  }
+
+#define REPLACE_BLOCK_FOR_STRUCT_CASE(cas) case cas: return REPLACEBLOCK_FOR(BILibStruct##cas)
+
+#define EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf) \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 0); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 1); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 2); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 3); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 4); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 5); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 6); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 7); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 8); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 9)
+
+#define EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf) \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 0); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 1); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 2); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 3); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 4); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 5); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 6); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 7); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 8); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 9)
+
+#pragma mark - BILib
 
 @implementation BILib
 
@@ -236,15 +284,77 @@
 + (void)replaceImplementationWithItem:(BIItem*)item
 {
   if (item.signature) {
-    id replaceBlock = ^(id target, ...){
-      [[BIItemManager sharedInstance] setCurrentItem:item];
-      va_list argp;
-      va_start(argp, target);
-      void* retp = [item invokeWithTarget:target args:&argp];
-      va_end(argp);
-      return retp ? *(void**)retp : NULL;
-    };
+    id replaceBlock;
+    NSUInteger returnLength = [item.signature methodReturnLength];
+    const char* returnType = [item.signature methodReturnType];
+    if (NULL == returnType || 0 == strlen(returnType)) {
+      replaceBlock = REPLACEBLOCK_FOR_VOID;
+    } else {
+      char prefix = returnType[0];
+      char type = returnType[strlen(returnType) - 1];
+      if ('^' == prefix || '{' == prefix) {
+        type = prefix;
+      }
+      switch (type) {
+        case 'v': { replaceBlock = REPLACEBLOCK_FOR_VOID; } break;
+        //case 'c': { replaceBlock = REPLACEBLOCK_FOR(char); } break;
+        //case 'i': { replaceBlock = REPLACEBLOCK_FOR(int); } break;
+        //case 's': { replaceBlock = REPLACEBLOCK_FOR(short); } break;
+        //case 'l': { replaceBlock = REPLACEBLOCK_FOR(long); } break;
+        //case 'q': { replaceBlock = REPLACEBLOCK_FOR(long long); } break;
+        //case 'C': { replaceBlock = REPLACEBLOCK_FOR(unsigned char); } break;
+        //case 'I': { replaceBlock = REPLACEBLOCK_FOR(unsigned int); } break;
+        //case 'S': { replaceBlock = REPLACEBLOCK_FOR(unsigned short); } break;
+        //case 'L': { replaceBlock = REPLACEBLOCK_FOR(unsigned long); } break;
+        //case 'Q': { replaceBlock = REPLACEBLOCK_FOR(unsigned long long); } break;
+        case 'f': { replaceBlock = REPLACEBLOCK_FOR(float); } break;
+        case 'd': { replaceBlock = REPLACEBLOCK_FOR(double); } break;
+        //case 'B': { replaceBlock = REPLACEBLOCK_FOR(bool); } break;
+        //case '*': { replaceBlock = REPLACEBLOCK_FOR(void*); } break;
+        //case '@': { replaceBlock = REPLACEBLOCK_FOR(void*); } break;
+        //case '#': { replaceBlock = REPLACEBLOCK_FOR(Class); } break;
+        //case ':': { replaceBlock = REPLACEBLOCK_FOR(SEL); } break;
+        case '{': { replaceBlock = [BILib replaceBlockForStructWithSize:returnLength withItem:item]; } break;
+        //case '^': { replaceBlock = REPLACEBLOCK_FOR(int*); } break;
+        default: { replaceBlock = REPLACEBLOCK_FOR(int); } break;
+      }
+    }
     method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
+  }
+}
+
++ (id)replaceBlockForStructWithSize:(NSUInteger)size withItem:(BIItem*)item
+{
+  switch (size) {
+    REPLACE_BLOCK_FOR_STRUCT_CASE(1);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(2);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(3);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(4);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(5);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(6);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(7);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(8);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(9);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(1);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(2);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(3);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(4);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(5);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(6);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(7);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(8);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(9);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(1);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(2);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(3);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(4);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(5);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(6);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(7);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(8);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(9);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(10);
+    default: return REPLACEBLOCK_FOR(int);
   }
 }
 

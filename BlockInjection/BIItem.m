@@ -90,7 +90,6 @@
     [invocation setSelector:self.originalSel];
     [invocation invoke];
     // Get return value
-    NSUInteger returnLength = [[invocation methodSignature] methodReturnLength];
     if (returnLength && result) {
       [invocation getReturnValue:result];
     }

@@ -80,8 +80,7 @@
   void* result = NULL;
   NSUInteger returnLength = [[invocation methodSignature] methodReturnLength];
   if (returnLength) {
-    //result = __builtin_alloca(returnLength);
-    result = malloc(returnLength);
+    result = __builtin_alloca(returnLength);
   }
   // Preprocess
   [self prepareWithInvocation:invocation];

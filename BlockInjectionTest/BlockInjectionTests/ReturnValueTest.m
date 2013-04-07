@@ -11,6 +11,12 @@
 
 static int ia[2] = {1, 2};
 
+struct ReturnValueBigStruct {
+  char buff[500];
+  CGFloat f;
+  char buff2[500];
+};
+
 #pragma mark - ClassForReturnValue
 
 @interface ClassForReturnValue : NSObject
@@ -40,6 +46,11 @@ static int ia[2] = {1, 2};
 }
 - (SEL)selValue {
   return @selector(tag);
+}
+- (struct ReturnValueBigStruct)bigStructValue {
+  struct ReturnValueBigStruct bigStruct;
+  bigStruct.f = 0.255;
+  return bigStruct;
 }
 @end
 
@@ -281,6 +292,44 @@ static int ia[2] = {1, 2};
   STAssertEquals(frame.origin.y, (CGFloat)2.0, @"y is invalid.");
   STAssertEquals(frame.size.width, (CGFloat)3.0, @"w is invalid.");
   STAssertEquals(frame.size.height, (CGFloat)4.0, @"h is invalid.");
+}
+
+- (void)testReturnCGPoint
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"UIView" methodName:@"center" preprocess:^(UIView* view){
+    if ([view isKindOfClass:[UIView class]]) {
+      success = YES;
+    }
+    return CGPointMake(0,0);
+  }];
+
+  UIView* view = [UIView new];
+  view.center = CGPointMake(1.0, 2.0);
+
+  CGPoint center = view.center;
+
+  STAssertTrue(success, @"success is invalid.");
+
+  STAssertEquals(center.x, (CGFloat)1.0, @"x is invalid.");
+  STAssertEquals(center.y, (CGFloat)2.0, @"y is invalid.");
+}
+
+- (void)testReturnBigStruct
+{
+  __block BOOL success = NO;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"bigStructValue" preprocess:^(id target){
+    if ([target isKindOfClass:[ClassForReturnValue class]]) {
+      success = YES;
+    }
+    struct ReturnValueBigStruct st;
+    return st;
+  }];
+
+  struct ReturnValueBigStruct ret = [[ClassForReturnValue new] bigStructValue];
+
+  STAssertTrue(success, @"success is invalid.");
+  STAssertEquals(ret.f, (CGFloat)0.255, @"ret is invalid.");
 }
 
 @end

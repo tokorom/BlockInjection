@@ -8,6 +8,7 @@
 #import "BIItem.h"
 #import "BIItemManager.h"
 #import <objc/runtime.h>
+#import "BILibDummyStruct.h"
 
 #define REPLACEBLOCK_FOR_VOID \
   ^(id target, ...){ \
@@ -27,6 +28,34 @@
     va_end(argp); \
     return *(type*)retp; \
   }
+
+#define REPLACE_BLOCK_FOR_STRUCT_CASE(cas) case cas: return REPLACEBLOCK_FOR(BILibStruct##cas)
+
+#define EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf) \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 0); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 1); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 2); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 3); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 4); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 5); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 6); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 7); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 8); \
+  REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 9)
+
+#define EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf) \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 0); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 1); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 2); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 3); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 4); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 5); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 6); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 7); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 8); \
+  EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(prf ## 9)
+
+#pragma mark - BILib
 
 @implementation BILib
 
@@ -256,8 +285,8 @@
 {
   if (item.signature) {
     id replaceBlock;
+    NSUInteger returnLength = [item.signature methodReturnLength];
     const char* returnType = [item.signature methodReturnType];
-  NSLog(@"##### returnType: %s", returnType);
     if (NULL == returnType || 0 == strlen(returnType)) {
       replaceBlock = REPLACEBLOCK_FOR_VOID;
     } else {
@@ -285,12 +314,47 @@
         //case '@': { replaceBlock = REPLACEBLOCK_FOR(void*); } break;
         //case '#': { replaceBlock = REPLACEBLOCK_FOR(Class); } break;
         //case ':': { replaceBlock = REPLACEBLOCK_FOR(SEL); } break;
-        case '{': { replaceBlock = REPLACEBLOCK_FOR(CGRect); } break;
+        case '{': { replaceBlock = [BILib replaceBlockForStructWithSize:returnLength withItem:item]; } break;
         //case '^': { replaceBlock = REPLACEBLOCK_FOR(int*); } break;
         default: { replaceBlock = REPLACEBLOCK_FOR(int); } break;
       }
     }
     method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
+  }
+}
+
++ (id)replaceBlockForStructWithSize:(NSUInteger)size withItem:(BIItem*)item
+{
+  switch (size) {
+    REPLACE_BLOCK_FOR_STRUCT_CASE(1);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(2);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(3);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(4);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(5);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(6);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(7);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(8);
+    REPLACE_BLOCK_FOR_STRUCT_CASE(9);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(1);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(2);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(3);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(4);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(5);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(6);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(7);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(8);
+    EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(9);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(1);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(2);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(3);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(4);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(5);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(6);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(7);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(8);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(9);
+    EXPAND_EXPAND_REPLACE_BLOCK_FOR_STRUCT_CASE(10);
+    default: return REPLACEBLOCK_FOR(int);
   }
 }
 

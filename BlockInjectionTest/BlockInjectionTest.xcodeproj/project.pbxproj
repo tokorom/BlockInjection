@@ -37,7 +37,7 @@
 		06584EB216DEFA6000CB2D68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06584EB416DEFA6000CB2D68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06584EB616DEFA6000CB2D68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockInjectionTestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BlockInjectionTestTests.octest; path = BlockInjectionTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		06584ED816DEFA6000CB2D68 /* BlockInjectionTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockInjectionTests-Info.plist"; sourceTree = "<group>"; };
 		06584EDA16DEFA6000CB2D68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };

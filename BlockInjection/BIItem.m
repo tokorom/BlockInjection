@@ -6,6 +6,8 @@
 
 #import "BIItem.h"
 #import "BILibArg.h"
+#import "BIItemManager.h"
+#import "BILibUtils.h"
 
 @interface BIItem ()
 @property (strong) NSMutableArray* preprocesses;
@@ -30,14 +32,18 @@
 
 - (void)dealloc
 {
-  if (self.pResult) free(self.pResult);
+  if (self.pResult) {
+    free(self.pResult);
+    self.pResult = NULL;
+  }
 }
 
 #pragma mark - Public Interface
 
 - (NSString*)prettyFunction
 {
-  return [NSString stringWithFormat:@"%@[%@ %@]",
+  return [NSString stringWithFormat:@"%@%@[%@ %@]",
+    [@"" stringByPaddingToLength:[[BIItemManager sharedInstance] indent] withString:@" " startingAtIndex:0],
     self.isClassMethod ? @"+" : @"-",
     NSStringFromClass(self.targetClass),
     NSStringFromSelector(self.targetSel)
@@ -47,6 +53,10 @@
 - (void)prepareWithInvocation:(NSInvocation*)invocation
 {
   self.skip = NO;
+  if (self.pResult) {
+    free(self.pResult);
+    self.pResult = NULL;
+  }
   self.invocation = invocation;
 }
 
@@ -72,6 +82,14 @@
 
 - (void*)invokeWithTarget:(id)target args:(va_list*)args
 {
+  BOOL isSuperMethod = NO;
+  if ([self isSuperClassMethodWithTarget:target]) {
+    [self setupSuperClassMethodForTarget:target];
+    isSuperMethod = YES;
+  }
+
+  BIItemManager* manager = [BIItemManager sharedInstance];
+
   NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:self.signature];
   [invocation setTarget:target];
   // Set arguments
@@ -85,15 +103,22 @@
   // Preprocess
   [self prepareWithInvocation:invocation];
   [self invokePreprocessWithInvocation:invocation];
+  ++manager.indent;
+
   if (!self.skip) {
     // Original
-    [invocation setSelector:self.originalSel];
+    if (isSuperMethod) {
+      [invocation setSelector:self.superSel];
+    } else {
+      [invocation setSelector:self.originalSel];
+    }
     [invocation invoke];
     // Get return value
     if (returnLength && result) {
       [invocation getReturnValue:result];
     }
     // Postprocess
+    --manager.indent;
     [self invokePostprocessWithInvocation:invocation];
   }
   return self.pResult ?: result;
@@ -104,17 +129,22 @@
   self.skip = YES;
   NSUInteger returnLength = [[self.invocation methodSignature] methodReturnLength];
   if (pReturnValue && returnLength) {
-    if (self.pResult) free(self.pResult);
+    if (self.pResult) {
+      free(self.pResult);
+      self.pResult = NULL;
+    }
     self.pResult = malloc(returnLength);
-    memcpy(self.pResult, pReturnValue, returnLength);
+    if (self.pResult) {
+      memcpy(self.pResult, pReturnValue, returnLength);
+    }
   }
 }
 
 #pragma mark - Private Methods
 
-
 - (void)invokePreprocessWithInvocation:(NSInvocation*)invocation
 {
+  [[BIItemManager sharedInstance] setCurrentItem:self];
   for (NSValue* value in self.preprocesses) {
     [invocation setSelector:[value pointerValue]];
     [invocation invoke];
@@ -126,6 +156,7 @@
 
 - (void)invokePostprocessWithInvocation:(NSInvocation*)invocation
 {
+  [[BIItemManager sharedInstance] setCurrentItem:self];
   for (NSValue* value in self.postprocesses) {
     [invocation setSelector:[value pointerValue]];
     [invocation invoke];
@@ -133,6 +164,24 @@
       break;
     }
   }
+}
+
+- (BOOL)isSuperClassMethodWithTarget:(id)target
+{
+  NSString* itemClassName = NSStringFromClass(self.targetClass);
+  NSString* targetClassName = NSStringFromClass([target class]);
+  return ![itemClassName isEqualToString:targetClassName];
+}
+
+- (void)setupSuperClassMethodForTarget:(id)target
+{
+  self.superSel = sel_registerName([[BILibUtils superNameForMethodName:NSStringFromSelector(self.targetSel)] UTF8String]);
+  Method superMethod = [BILibUtils getMethodInClass:self.targetClass selector:self.originalSel];
+  [BILibUtils addMethodToClass:[target class]
+                      selector:self.superSel
+                           imp:method_getImplementation(superMethod)
+                  typeEncoding:method_getTypeEncoding(superMethod)
+                 isClassMethod:self.isClassMethod];
 }
 
 @end

@@ -21,6 +21,8 @@
 		0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0685AD09170DCB8D0082AD69 /* SkippingTest.m */; };
 		06941C1016E7344800EDAA36 /* BILibArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 06941C0F16E7344800EDAA36 /* BILibArg.m */; };
 		06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC319817117EBD0017A9CF /* ReturnValueTest.m */; };
+		06EE07791722CC61004EBE60 /* InheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EE07781722CC61004EBE60 /* InheritanceTest.m */; };
+		06EE077C1723C573004EBE60 /* BILibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EE077B1723C573004EBE60 /* BILibUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		061D0EEB16E48F460041268A /* BIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIItem.m; sourceTree = "<group>"; };
 		061D0EED16E4A0660041268A /* BIItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItemManager.h; sourceTree = "<group>"; };
 		061D0EEE16E4A0660041268A /* BIItemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIItemManager.m; sourceTree = "<group>"; };
+		06310E4F17156F2D0093B4F2 /* BILibDummyStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibDummyStruct.h; sourceTree = "<group>"; };
+		06310E5017156F2D0093B4F2 /* BILibExclusives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibExclusives.h; sourceTree = "<group>"; };
 		06584EB216DEFA6000CB2D68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06584EB416DEFA6000CB2D68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06584EB616DEFA6000CB2D68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -52,6 +56,10 @@
 		06941C0F16E7344800EDAA36 /* BILibArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILibArg.m; sourceTree = "<group>"; };
 		06BC319717117EBD0017A9CF /* ReturnValueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValueTest.h; sourceTree = "<group>"; };
 		06BC319817117EBD0017A9CF /* ReturnValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnValueTest.m; sourceTree = "<group>"; };
+		06EE07771722CC61004EBE60 /* InheritanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InheritanceTest.h; sourceTree = "<group>"; };
+		06EE07781722CC61004EBE60 /* InheritanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InheritanceTest.m; sourceTree = "<group>"; };
+		06EE077A1723C573004EBE60 /* BILibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibUtils.h; sourceTree = "<group>"; };
+		06EE077B1723C573004EBE60 /* BILibUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILibUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,8 @@
 				0685AD09170DCB8D0082AD69 /* SkippingTest.m */,
 				06BC319717117EBD0017A9CF /* ReturnValueTest.h */,
 				06BC319817117EBD0017A9CF /* ReturnValueTest.m */,
+				06EE07771722CC61004EBE60 /* InheritanceTest.h */,
+				06EE07781722CC61004EBE60 /* InheritanceTest.m */,
 				06584ED716DEFA6000CB2D68 /* Supporting Files */,
 			);
 			path = BlockInjectionTests;
@@ -130,6 +140,10 @@
 		06584EE716DEFAF800CB2D68 /* BlockInjection */ = {
 			isa = PBXGroup;
 			children = (
+				06EE077A1723C573004EBE60 /* BILibUtils.h */,
+				06EE077B1723C573004EBE60 /* BILibUtils.m */,
+				06310E4F17156F2D0093B4F2 /* BILibDummyStruct.h */,
+				06310E5017156F2D0093B4F2 /* BILibExclusives.h */,
 				06941C0E16E7344800EDAA36 /* BILibArg.h */,
 				06941C0F16E7344800EDAA36 /* BILibArg.m */,
 				061D0EED16E4A0660041268A /* BIItemManager.h */,
@@ -232,6 +246,8 @@
 				06162C1316FF350900213ACD /* RegexTest.m in Sources */,
 				0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */,
 				06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */,
+				06EE07791722CC61004EBE60 /* InheritanceTest.m in Sources */,
+				06EE077C1723C573004EBE60 /* BILibUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

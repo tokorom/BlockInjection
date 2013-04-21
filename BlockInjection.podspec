@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "BlockInjection"
-  s.version      = "0.6.2"
+  s.version      = "0.6.3"
   s.summary      = "You can insert some Blocks before and after the method."
   s.homepage     = "https://github.com/tokorom/BlockInjection"
   s.license      = 'MIT'
   s.author       = { "tokorom" => "tokorom@gmail.com" }
-  s.source       = { :git => "https://github.com/tokorom/BlockInjection.git", :tag => "0.6.2" }
+  s.source       = { :git => "https://github.com/tokorom/BlockInjection.git", :tag => "0.6.3" }
   s.source_files = 'BlockInjection'
   s.requires_arc = true
 

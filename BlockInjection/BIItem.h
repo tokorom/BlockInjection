@@ -9,6 +9,7 @@
 @property (assign) Class targetClass;
 @property (assign) SEL targetSel;
 @property (assign) SEL originalSel;
+@property (assign) SEL superSel;
 @property (assign) void* originalMethod;
 @property (strong) NSMethodSignature* signature;
 @property (assign) unsigned int numberOfArguments;

@@ -23,10 +23,10 @@
 
 + (void)skipAfterProcessesWithReturnValue:(void*)pReturnValue;
 
-+ (void)clear;
-
 + (BOOL)replaceImplementationForClass:(Class)class selector:(SEL)sel block:(id)block;
 + (BOOL)replaceImplementationForClassName:(NSString*)className methodName:(NSString*)methodName block:(id)block;
+
++ (void)clear;
 
 /**
  * Deprecated

@@ -66,16 +66,16 @@ typedef struct bilib_test_1024 {
 }
 @end 
 
-#pragma mark - Child
+#pragma mark - BizzChild
 
-@interface Child : Bizz
+@interface BizzChild : Bizz
 - (void)sayMessage:(NSString*)message tag:(int)tag;
 @end 
 
-@implementation Child
+@implementation BizzChild
 - (void)sayMessage:(NSString*)message tag:(int)tag
 {
-  NSLog(@"Child says: %@ %d", message, tag);
+  NSLog(@"BizzChild says: %@ %d", message, tag);
   [super sayMessage:message];
 }
 @end 
@@ -252,11 +252,11 @@ typedef struct bilib_test_1024 {
 
 - (void)testSubclass
 {
-  [BILib injectToClass:[Child class] selector:@selector(sayMessage:tag:) preprocess:^(Child* child, NSString* message, int tag){
+  [BILib injectToClass:[BizzChild class] selector:@selector(sayMessage:tag:) preprocess:^(BizzChild* child, NSString* message, int tag){
     ++child.count;
   }];
 
-  Child* child = [Child new];
+  BizzChild* child = [BizzChild new];
 
   STAssertEquals(child.count, 0, @"count is invalid.");
 
@@ -366,12 +366,12 @@ typedef struct bilib_test_1024 {
 {
   __block NSString* str = nil;
   __block int i = 0;
-  [BILib injectToClass:[Child class] selector:@selector(sayMessage:tag:) preprocess:^(Child* child, NSString* message, int tag){
+  [BILib injectToClass:[BizzChild class] selector:@selector(sayMessage:tag:) preprocess:^(BizzChild* child, NSString* message, int tag){
     str = message;
     i = tag;
   }];
 
-  Child* child = [Child new];
+  BizzChild* child = [BizzChild new];
 
   STAssertEquals(i, 0, @"i is invalid.");
 

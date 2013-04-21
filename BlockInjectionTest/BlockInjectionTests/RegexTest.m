@@ -239,4 +239,41 @@
   STAssertEquals(i, 2, @"i is invalid.");
 }
 
+- (void)testPreprocessInAllMethods
+{
+  NSError* error = nil;
+  NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^UIView$" options:0 error:&error];
+  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@".*" options:0 error:&error];
+
+  [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{
+    NSLog(@"%@", [BILib prettyFunction]);
+  }];
+
+  UIView* view = [UIView new];
+  
+  view.frame = CGRectMake(0.0, 0.0, 10.0, 5.0);
+
+  STAssertEquals(1, 1, nil);
+}
+
+- (void)testPreprocessAndPostprocessInAllMethods
+{
+  NSError* error = nil;
+  NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^UIView$" options:0 error:&error];
+  NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@".*" options:0 error:&error];
+
+  [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{
+    NSLog(@"< PRE: %@", [BILib prettyFunction]);
+  }];
+  [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex postprocess:^{
+    NSLog(@"POST >: %@", [BILib prettyFunction]);
+  }];
+
+  UIView* view = [UIView new];
+  
+  view.frame = CGRectMake(0.0, 0.0, 10.0, 5.0);
+
+  STAssertEquals(1, 1, nil);
+}
+
 @end

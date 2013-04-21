@@ -9,6 +9,7 @@
 @interface BIItemManager : NSObject
 
 @property (weak) BIItem* currentItem;
+@property (assign) int indent;
 
 + (BIItemManager*)sharedInstance;
 

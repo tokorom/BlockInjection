@@ -82,6 +82,10 @@
 
 - (void*)invokeWithTarget:(id)target args:(va_list*)args
 {
+  if (![BILibUtils getMethodInClass:[target class] selector:self.originalSel]) {
+    return NULL;
+  }
+
   BOOL isSuperMethod = NO;
   if ([self isSuperClassMethodWithTarget:target]) {
     [self setupSuperClassMethodForTarget:target];

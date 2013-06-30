@@ -1,3 +1,7 @@
 language: objective-c
-script: make clean test
-after_success: coveralls
+before_install:
+- sudo easy_install cpp-coveralls
+script:
+- make clean test
+after_success:
+- coveralls --verbose

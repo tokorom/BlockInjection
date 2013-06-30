@@ -7,31 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0601289416FD671400603736 /* ClassMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0601289316FD671400603736 /* ClassMethodTest.m */; };
-		06162C1016FDECB000213ACD /* ReplaceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06162C0F16FDECB000213ACD /* ReplaceTest.m */; };
-		06162C1316FF350900213ACD /* RegexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06162C1216FF350900213ACD /* RegexTest.m */; };
 		061D0EEC16E48F460041268A /* BIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEB16E48F460041268A /* BIItem.m */; };
 		061D0EEF16E4A0660041268A /* BIItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 061D0EEE16E4A0660041268A /* BIItemManager.m */; };
 		06584ED116DEFA6000CB2D68 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */; };
 		06584ED216DEFA6000CB2D68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB216DEFA6000CB2D68 /* UIKit.framework */; };
 		06584ED316DEFA6000CB2D68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB416DEFA6000CB2D68 /* Foundation.framework */; };
-		06584EDB16DEFA6000CB2D68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06584ED916DEFA6000CB2D68 /* InfoPlist.strings */; };
-		06584EDE16DEFA6000CB2D68 /* BasicTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EDD16DEFA6000CB2D68 /* BasicTest.m */; };
 		06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EEB16DEFAF800CB2D68 /* BILib.m */; };
-		0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0685AD09170DCB8D0082AD69 /* SkippingTest.m */; };
 		06941C1016E7344800EDAA36 /* BILibArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 06941C0F16E7344800EDAA36 /* BILibArg.m */; };
-		06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC319817117EBD0017A9CF /* ReturnValueTest.m */; };
-		06EE07791722CC61004EBE60 /* InheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EE07781722CC61004EBE60 /* InheritanceTest.m */; };
 		06EE077C1723C573004EBE60 /* BILibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EE077B1723C573004EBE60 /* BILibUtils.m */; };
+		06F03DDB177FB42A00745436 /* BasicTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DCB177FB42A00745436 /* BasicTest.m */; };
+		06F03DDD177FB42A00745436 /* ClassMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DCE177FB42A00745436 /* ClassMethodTest.m */; };
+		06F03DDE177FB42A00745436 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06F03DCF177FB42A00745436 /* InfoPlist.strings */; };
+		06F03DDF177FB42A00745436 /* InheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DD2177FB42A00745436 /* InheritanceTest.m */; };
+		06F03DE0177FB42A00745436 /* RegexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DD4177FB42A00745436 /* RegexTest.m */; };
+		06F03DE1177FB42A00745436 /* ReplaceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DD6177FB42A00745436 /* ReplaceTest.m */; };
+		06F03DE2177FB42A00745436 /* ReturnValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DD8177FB42A00745436 /* ReturnValueTest.m */; };
+		06F03DE3177FB42A00745436 /* SkippingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DDA177FB42A00745436 /* SkippingTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0601289216FD671400603736 /* ClassMethodTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMethodTest.h; sourceTree = "<group>"; };
-		0601289316FD671400603736 /* ClassMethodTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMethodTest.m; sourceTree = "<group>"; };
-		06162C0E16FDECB000213ACD /* ReplaceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplaceTest.h; sourceTree = "<group>"; };
-		06162C0F16FDECB000213ACD /* ReplaceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplaceTest.m; sourceTree = "<group>"; };
-		06162C1116FF350900213ACD /* RegexTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexTest.h; sourceTree = "<group>"; };
-		06162C1216FF350900213ACD /* RegexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexTest.m; sourceTree = "<group>"; };
 		061D0EEA16E48F460041268A /* BIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItem.h; sourceTree = "<group>"; };
 		061D0EEB16E48F460041268A /* BIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIItem.m; sourceTree = "<group>"; };
 		061D0EED16E4A0660041268A /* BIItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIItemManager.h; sourceTree = "<group>"; };
@@ -41,25 +35,30 @@
 		06584EB216DEFA6000CB2D68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06584EB416DEFA6000CB2D68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06584EB616DEFA6000CB2D68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BlockInjectionTestTests.octest; path = BlockInjectionTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06584ECF16DEFA6000CB2D68 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		06584ED816DEFA6000CB2D68 /* BlockInjectionTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockInjectionTests-Info.plist"; sourceTree = "<group>"; };
-		06584EDA16DEFA6000CB2D68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		06584EDC16DEFA6000CB2D68 /* BasicTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicTest.h; sourceTree = "<group>"; };
-		06584EDD16DEFA6000CB2D68 /* BasicTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicTest.m; sourceTree = "<group>"; };
 		06584EEA16DEFAF800CB2D68 /* BILib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILib.h; sourceTree = "<group>"; };
 		06584EEB16DEFAF800CB2D68 /* BILib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILib.m; sourceTree = "<group>"; };
-		06584EF116DEFE7300CB2D68 /* BlockInjectionTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlockInjectionTest-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		0685AD08170DCB8D0082AD69 /* SkippingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkippingTest.h; sourceTree = "<group>"; };
-		0685AD09170DCB8D0082AD69 /* SkippingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkippingTest.m; sourceTree = "<group>"; };
 		06941C0E16E7344800EDAA36 /* BILibArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibArg.h; sourceTree = "<group>"; };
 		06941C0F16E7344800EDAA36 /* BILibArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILibArg.m; sourceTree = "<group>"; };
-		06BC319717117EBD0017A9CF /* ReturnValueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValueTest.h; sourceTree = "<group>"; };
-		06BC319817117EBD0017A9CF /* ReturnValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnValueTest.m; sourceTree = "<group>"; };
-		06EE07771722CC61004EBE60 /* InheritanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InheritanceTest.h; sourceTree = "<group>"; };
-		06EE07781722CC61004EBE60 /* InheritanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InheritanceTest.m; sourceTree = "<group>"; };
 		06EE077A1723C573004EBE60 /* BILibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibUtils.h; sourceTree = "<group>"; };
 		06EE077B1723C573004EBE60 /* BILibUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILibUtils.m; sourceTree = "<group>"; };
+		06F03DCA177FB42A00745436 /* BasicTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTest.h; sourceTree = "<group>"; };
+		06F03DCB177FB42A00745436 /* BasicTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTest.m; sourceTree = "<group>"; };
+		06F03DCC177FB42A00745436 /* BlockInjectionTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BlockInjectionTests-Info.plist"; sourceTree = "<group>"; };
+		06F03DCD177FB42A00745436 /* ClassMethodTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassMethodTest.h; sourceTree = "<group>"; };
+		06F03DCE177FB42A00745436 /* ClassMethodTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMethodTest.m; sourceTree = "<group>"; };
+		06F03DD0177FB42A00745436 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		06F03DD1177FB42A00745436 /* InheritanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InheritanceTest.h; sourceTree = "<group>"; };
+		06F03DD2177FB42A00745436 /* InheritanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InheritanceTest.m; sourceTree = "<group>"; };
+		06F03DD3177FB42A00745436 /* RegexTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexTest.h; sourceTree = "<group>"; };
+		06F03DD4177FB42A00745436 /* RegexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexTest.m; sourceTree = "<group>"; };
+		06F03DD5177FB42A00745436 /* ReplaceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplaceTest.h; sourceTree = "<group>"; };
+		06F03DD6177FB42A00745436 /* ReplaceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplaceTest.m; sourceTree = "<group>"; };
+		06F03DD7177FB42A00745436 /* ReturnValueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValueTest.h; sourceTree = "<group>"; };
+		06F03DD8177FB42A00745436 /* ReturnValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnValueTest.m; sourceTree = "<group>"; };
+		06F03DD9177FB42A00745436 /* SkippingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkippingTest.h; sourceTree = "<group>"; };
+		06F03DDA177FB42A00745436 /* SkippingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkippingTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				06584EE716DEFAF800CB2D68 /* BlockInjection */,
-				06584ED616DEFA6000CB2D68 /* BlockInjectionTests */,
+				06F03DC9177FB42A00745436 /* Tests */,
 				06584EB116DEFA6000CB2D68 /* Frameworks */,
 				06584EB016DEFA6000CB2D68 /* Products */,
 			);
@@ -89,7 +88,7 @@
 		06584EB016DEFA6000CB2D68 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */,
+				06584ECF16DEFA6000CB2D68 /* Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,38 +102,6 @@
 				06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		06584ED616DEFA6000CB2D68 /* BlockInjectionTests */ = {
-			isa = PBXGroup;
-			children = (
-				06584EDC16DEFA6000CB2D68 /* BasicTest.h */,
-				06584EDD16DEFA6000CB2D68 /* BasicTest.m */,
-				0601289216FD671400603736 /* ClassMethodTest.h */,
-				0601289316FD671400603736 /* ClassMethodTest.m */,
-				06162C0E16FDECB000213ACD /* ReplaceTest.h */,
-				06162C0F16FDECB000213ACD /* ReplaceTest.m */,
-				06162C1116FF350900213ACD /* RegexTest.h */,
-				06162C1216FF350900213ACD /* RegexTest.m */,
-				0685AD08170DCB8D0082AD69 /* SkippingTest.h */,
-				0685AD09170DCB8D0082AD69 /* SkippingTest.m */,
-				06BC319717117EBD0017A9CF /* ReturnValueTest.h */,
-				06BC319817117EBD0017A9CF /* ReturnValueTest.m */,
-				06EE07771722CC61004EBE60 /* InheritanceTest.h */,
-				06EE07781722CC61004EBE60 /* InheritanceTest.m */,
-				06584ED716DEFA6000CB2D68 /* Supporting Files */,
-			);
-			path = BlockInjectionTests;
-			sourceTree = "<group>";
-		};
-		06584ED716DEFA6000CB2D68 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				06584EF116DEFE7300CB2D68 /* BlockInjectionTest-Prefix.pch */,
-				06584ED816DEFA6000CB2D68 /* BlockInjectionTests-Info.plist */,
-				06584ED916DEFA6000CB2D68 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		06584EE716DEFAF800CB2D68 /* BlockInjection */ = {
@@ -157,12 +124,35 @@
 			path = ../BlockInjection;
 			sourceTree = "<group>";
 		};
+		06F03DC9177FB42A00745436 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				06F03DCA177FB42A00745436 /* BasicTest.h */,
+				06F03DCB177FB42A00745436 /* BasicTest.m */,
+				06F03DCC177FB42A00745436 /* BlockInjectionTests-Info.plist */,
+				06F03DCD177FB42A00745436 /* ClassMethodTest.h */,
+				06F03DCE177FB42A00745436 /* ClassMethodTest.m */,
+				06F03DCF177FB42A00745436 /* InfoPlist.strings */,
+				06F03DD1177FB42A00745436 /* InheritanceTest.h */,
+				06F03DD2177FB42A00745436 /* InheritanceTest.m */,
+				06F03DD3177FB42A00745436 /* RegexTest.h */,
+				06F03DD4177FB42A00745436 /* RegexTest.m */,
+				06F03DD5177FB42A00745436 /* ReplaceTest.h */,
+				06F03DD6177FB42A00745436 /* ReplaceTest.m */,
+				06F03DD7177FB42A00745436 /* ReturnValueTest.h */,
+				06F03DD8177FB42A00745436 /* ReturnValueTest.m */,
+				06F03DD9177FB42A00745436 /* SkippingTest.h */,
+				06F03DDA177FB42A00745436 /* SkippingTest.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		06584ECE16DEFA6000CB2D68 /* BlockInjectionTests */ = {
+		06584ECE16DEFA6000CB2D68 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTests" */;
+			buildConfigurationList = 06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
 				06584ECA16DEFA6000CB2D68 /* Sources */,
 				06584ECB16DEFA6000CB2D68 /* Frameworks */,
@@ -173,9 +163,9 @@
 			);
 			dependencies = (
 			);
-			name = BlockInjectionTests;
+			name = Tests;
 			productName = BlockInjectionTestTests;
-			productReference = 06584ECF16DEFA6000CB2D68 /* BlockInjectionTestTests.octest */;
+			productReference = 06584ECF16DEFA6000CB2D68 /* Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +189,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				06584ECE16DEFA6000CB2D68 /* BlockInjectionTests */,
+				06584ECE16DEFA6000CB2D68 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -209,7 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06584EDB16DEFA6000CB2D68 /* InfoPlist.strings in Resources */,
+				06F03DDE177FB42A00745436 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,28 +226,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06584EDE16DEFA6000CB2D68 /* BasicTest.m in Sources */,
 				06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */,
 				061D0EEC16E48F460041268A /* BIItem.m in Sources */,
 				061D0EEF16E4A0660041268A /* BIItemManager.m in Sources */,
 				06941C1016E7344800EDAA36 /* BILibArg.m in Sources */,
-				0601289416FD671400603736 /* ClassMethodTest.m in Sources */,
-				06162C1016FDECB000213ACD /* ReplaceTest.m in Sources */,
-				06162C1316FF350900213ACD /* RegexTest.m in Sources */,
-				0685AD0A170DCB8D0082AD69 /* SkippingTest.m in Sources */,
-				06BC319917117EBD0017A9CF /* ReturnValueTest.m in Sources */,
-				06EE07791722CC61004EBE60 /* InheritanceTest.m in Sources */,
 				06EE077C1723C573004EBE60 /* BILibUtils.m in Sources */,
+				06F03DDB177FB42A00745436 /* BasicTest.m in Sources */,
+				06F03DDD177FB42A00745436 /* ClassMethodTest.m in Sources */,
+				06F03DDF177FB42A00745436 /* InheritanceTest.m in Sources */,
+				06F03DE0177FB42A00745436 /* RegexTest.m in Sources */,
+				06F03DE1177FB42A00745436 /* ReplaceTest.m in Sources */,
+				06F03DE2177FB42A00745436 /* ReturnValueTest.m in Sources */,
+				06F03DE3177FB42A00745436 /* SkippingTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		06584ED916DEFA6000CB2D68 /* InfoPlist.strings */ = {
+		06F03DCF177FB42A00745436 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				06584EDA16DEFA6000CB2D68 /* en */,
+				06F03DD0177FB42A00745436 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -332,7 +322,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlockInjectionTest-Prefix.pch";
-				INFOPLIST_FILE = "BlockInjectionTests/BlockInjectionTests-Info.plist";
+				INFOPLIST_FILE = "Tests/BlockInjectionTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -342,16 +332,14 @@
 		06584EE616DEFA6000CB2D68 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BlockInjectionTest.app/BlockInjectionTest";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlockInjectionTest-Prefix.pch";
-				INFOPLIST_FILE = "BlockInjectionTests/BlockInjectionTests-Info.plist";
+				INFOPLIST_FILE = "Tests/BlockInjectionTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -368,7 +356,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "BlockInjectionTests" */ = {
+		06584EE416DEFA6000CB2D68 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				06584EE516DEFA6000CB2D68 /* Debug */,

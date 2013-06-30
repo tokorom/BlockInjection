@@ -1,5 +1,6 @@
 ![Version](http://cocoapod-badges.herokuapp.com/v/BlockInjection/badge.png)
 ![Platform](http://cocoapod-badges.herokuapp.com/p/BlockInjection/badge.png)
+[![Build Status](https://travis-ci.org/tokorom/BlockInjection.png?branch=master)](https://travis-ci.org/tokorom/BlockInjection)
 
 # BlockInjection
 

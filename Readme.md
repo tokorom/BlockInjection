@@ -1,3 +1,6 @@
+![Version](http://cocoapod-badges.herokuapp.com/v/BlockInjection/badge.png)
+![Platform](http://cocoapod-badges.herokuapp.com/p/BlockInjection/badge.png)
+
 # BlockInjection
 
 BlockInjection is a helpful library for iOS and Mac OS X.

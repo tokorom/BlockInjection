@@ -1,5 +1,7 @@
 clean:
-	xcodebuild clean
+	xcodebuild \
+		-project BlockInjectionTest/BlockInjectionTest.xcodeproj \
+		clean
 
 test:
 	xcodebuild \

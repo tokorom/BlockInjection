@@ -1,6 +1,7 @@
-![Version](http://cocoapod-badges.herokuapp.com/v/BlockInjection/badge.png)
-![Platform](http://cocoapod-badges.herokuapp.com/p/BlockInjection/badge.png)
-[![Build Status](https://travis-ci.org/tokorom/BlockInjection.png?branch=master)](https://travis-ci.org/tokorom/BlockInjection)
+![version](http://cocoapod-badges.herokuapp.com/v/BlockInjection/badge.png) &nbsp;&nbsp;
+![platform](http://cocoapod-badges.herokuapp.com/p/BlockInjection/badge.png) &nbsp;&nbsp; 
+[![build](https://travis-ci.org/tokorom/BlockInjection.png?branch=master)](https://travis-ci.org/tokorom/BlockInjection) &nbsp;&nbsp;
+[![coverage](https://coveralls.io/repos/tokorom/BlockInjection/badge.png)](https://coveralls.io/r/tokorom/BlockInjection) &nbsp;&nbsp;
 
 # BlockInjection
 

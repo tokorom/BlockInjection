@@ -26,9 +26,9 @@ test-with-coverage:
 		GCC_GENERATE_TEST_COVERAGE_FILES=YES
 
 send-coverage:
+	zsh
+	rm **/*Test.gcda
 	coveralls \
 		-t $(COVERALLS_TOEKN) \
-		--exclude Tests \
-		--exclude BlockInjectionTes \
 		--verbose 
 

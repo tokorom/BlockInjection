@@ -11,6 +11,10 @@
 
 #pragma mark - SubjectForReplace
 
+@interface SubjectForDummy : NSObject
+- (void)instanceMethod2:(id)arg;
+@end 
+
 @interface SubjectForReplace : NSObject
 - (void)instanceMethod:(id)arg;
 + (void)classMethod:(id)arg;
@@ -57,6 +61,20 @@
   [[SubjectForReplace new] instanceMethod:@"hello!"];
 
   STAssertEquals(i, 1, @"i is invalid.");
+}
+
+- (void)testReplaceImplementationForNoMethods
+{
+  __block int i = 0;
+  [BILib replaceImplementationForClass:[SubjectForReplace class] selector:@selector(instanceMethod2:) block:^{
+    ++i;
+  }];
+
+  STAssertEquals(i, 0, @"i is invalid.");
+
+  [[SubjectForReplace new] instanceMethod:@"hello!"];
+
+  STAssertEquals(i, 0, @"i is invalid.");
 }
 
 - (void)testReplaceImplementationWithArg

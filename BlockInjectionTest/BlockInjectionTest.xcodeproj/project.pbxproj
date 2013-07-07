@@ -13,6 +13,7 @@
 		06584ED216DEFA6000CB2D68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB216DEFA6000CB2D68 /* UIKit.framework */; };
 		06584ED316DEFA6000CB2D68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06584EB416DEFA6000CB2D68 /* Foundation.framework */; };
 		06584EF016DEFC8D00CB2D68 /* BILib.m in Sources */ = {isa = PBXBuildFile; fileRef = 06584EEB16DEFAF800CB2D68 /* BILib.m */; };
+		066CDB0917898A490024EDB8 /* EtcTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 066CDB0817898A490024EDB8 /* EtcTest.m */; };
 		06941C1016E7344800EDAA36 /* BILibArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 06941C0F16E7344800EDAA36 /* BILibArg.m */; };
 		06EE077C1723C573004EBE60 /* BILibUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EE077B1723C573004EBE60 /* BILibUtils.m */; };
 		06F03DDB177FB42A00745436 /* BasicTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F03DCB177FB42A00745436 /* BasicTest.m */; };
@@ -39,6 +40,8 @@
 		06584ED016DEFA6000CB2D68 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		06584EEA16DEFAF800CB2D68 /* BILib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILib.h; sourceTree = "<group>"; };
 		06584EEB16DEFAF800CB2D68 /* BILib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILib.m; sourceTree = "<group>"; };
+		066CDB0717898A490024EDB8 /* EtcTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EtcTest.h; sourceTree = "<group>"; };
+		066CDB0817898A490024EDB8 /* EtcTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EtcTest.m; sourceTree = "<group>"; };
 		06941C0E16E7344800EDAA36 /* BILibArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibArg.h; sourceTree = "<group>"; };
 		06941C0F16E7344800EDAA36 /* BILibArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BILibArg.m; sourceTree = "<group>"; };
 		06EE077A1723C573004EBE60 /* BILibUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BILibUtils.h; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				06F03DD8177FB42A00745436 /* ReturnValueTest.m */,
 				06F03DD9177FB42A00745436 /* SkippingTest.h */,
 				06F03DDA177FB42A00745436 /* SkippingTest.m */,
+				066CDB0717898A490024EDB8 /* EtcTest.h */,
+				066CDB0817898A490024EDB8 /* EtcTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				06F03DE1177FB42A00745436 /* ReplaceTest.m in Sources */,
 				06F03DE2177FB42A00745436 /* ReturnValueTest.m in Sources */,
 				06F03DE3177FB42A00745436 /* SkippingTest.m in Sources */,
+				066CDB0917898A490024EDB8 /* EtcTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

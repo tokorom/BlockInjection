@@ -341,32 +341,6 @@
   }
 }
 
-#pragma mark - Deprecated Methods
-
-+ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class preprocess:(id)preprocess
-{
-  return [BILib injectToSelector:sel forClass:class preprocess:preprocess postprocess:nil];
-}
-
-+ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class postprocess:(id)postprocess
-{
-  return [BILib injectToSelector:sel forClass:class preprocess:nil postprocess:postprocess];
-}
-
-+ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className preprocess:(id)preprocess
-{
-  Class class = objc_getClass([className UTF8String]);
-  SEL sel = sel_getUid([methodName UTF8String]);
-  return [BILib injectToSelector:sel forClass:class preprocess:preprocess];
-}
-
-+ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className postprocess:(id)postprocess
-{
-  Class class = objc_getClass([className UTF8String]);
-  SEL sel = sel_getUid([methodName UTF8String]);
-  return [BILib injectToSelector:sel forClass:class postprocess:postprocess];
-}
-
 #pragma mark - Inline methods
 
 inline NSRegularExpression* BIRegex(NSString* regexString)

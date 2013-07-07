@@ -94,7 +94,7 @@
 
 - (void)testOverrideReturnValueByPostprocess
 {
-  [BILib injectToClassWithName:@"SubjectForSkipping" methodName:@"intValue" preprocess:^{
+  [BILib injectToClassWithName:@"SubjectForSkipping" methodName:@"intValue" postprocess:^{
     int ret = 99;
     [BILib skipAfterProcessesWithReturnValue:&ret];
   }];

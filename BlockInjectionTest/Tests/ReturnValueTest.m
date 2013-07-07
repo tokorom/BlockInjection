@@ -8,6 +8,7 @@
 
 #import "ReturnValueTest.h"
 #import "BILib.h"
+#import "BILibDummyStruct.h"
 
 static int ia[2] = {1, 2};
 
@@ -52,9 +53,34 @@ struct ReturnValueBigStruct {
   bigStruct.f = 0.255;
   return bigStruct;
 }
+- (BILibStruct1)struct1 { BILibStruct1 st; return st; }
+- (BILibStruct2)struct2 { BILibStruct2 st; return st; }
+- (BILibStruct3)struct3 { BILibStruct3 st; return st; }
+- (BILibStruct4)struct4 { BILibStruct4 st; return st; }
+- (BILibStruct5)struct5 { BILibStruct5 st; return st; }
+- (BILibStruct6)struct6 { BILibStruct6 st; return st; }
+- (BILibStruct7)struct7 { BILibStruct7 st; return st; }
+- (BILibStruct8)struct8 { BILibStruct8 st; return st; }
+- (BILibStruct9)struct9 { BILibStruct9 st; return st; }
+- (BILibStruct10)struct10 { BILibStruct10 st; return st; }
+- (BILibStruct20)struct20 { BILibStruct20 st; return st; }
+- (BILibStruct30)struct30 { BILibStruct30 st; return st; }
+- (BILibStruct40)struct40 { BILibStruct40 st; return st; }
+- (BILibStruct50)struct50 { BILibStruct50 st; return st; }
+- (BILibStruct60)struct60 { BILibStruct60 st; return st; }
+- (BILibStruct70)struct70 { BILibStruct70 st; return st; }
+- (BILibStruct80)struct80 { BILibStruct80 st; return st; }
+- (BILibStruct90)struct90 { BILibStruct90 st; return st; }
+- (BILibStruct100)struct100 { BILibStruct100 st; return st; }
+- (BILibStruct200)struct200 { BILibStruct200 st; return st; }
+- (BILibStruct300)struct300 { BILibStruct300 st; return st; }
+- (BILibStruct400)struct400 { BILibStruct400 st; return st; }
+- (BILibStruct500)struct500 { BILibStruct500 st; return st; }
+- (BILibStruct600)struct600 { BILibStruct600 st; return st; }
+- (BILibStruct700)struct700 { BILibStruct700 st; return st; }
+- (BILibStruct800)struct800 { BILibStruct800 st; return st; }
+- (BILibStruct900)struct900 { BILibStruct900 st; return st; }
 @end
-
-#pragma mark - Private Methods
 
 @implementation ReturnValueTest
 
@@ -330,6 +356,147 @@ struct ReturnValueBigStruct {
 
   STAssertTrue(success, @"success is invalid.");
   STAssertEquals(ret.f, (CGFloat)0.255, @"ret is invalid.");
+}
+
+- (void)testReturnSomeStruct
+{
+  __block int count = 0;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct1" preprocess:^BILibStruct1(id target){
+    ++count; BILibStruct1 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct2" preprocess:^BILibStruct2(id target){
+    ++count; BILibStruct2 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct3" preprocess:^BILibStruct3(id target){
+    ++count; BILibStruct3 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct4" preprocess:^BILibStruct4(id target){
+    ++count; BILibStruct4 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct5" preprocess:^BILibStruct5(id target){
+    ++count; BILibStruct5 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct6" preprocess:^BILibStruct6(id target){
+    ++count; BILibStruct6 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct7" preprocess:^BILibStruct7(id target){
+    ++count; BILibStruct7 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct8" preprocess:^BILibStruct8(id target){
+    ++count; BILibStruct8 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct9" preprocess:^BILibStruct9(id target){
+    ++count; BILibStruct9 st; return st;
+  }];
+
+  STAssertEquals(count, (int)0, @"count is invalid.");
+
+  ClassForReturnValue* c = [ClassForReturnValue new];
+  [c struct1];
+  [c struct2];
+  [c struct3];
+  [c struct4];
+  [c struct5];
+  [c struct6];
+  [c struct7];
+  [c struct8];
+  [c struct9];
+
+  STAssertEquals(count, (int)9, @"count is invalid.");
+}
+
+- (void)testReturnSomeStruct10
+{
+  __block int count = 0;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct10" preprocess:^BILibStruct10(id target){
+    ++count; BILibStruct10 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct20" preprocess:^BILibStruct20(id target){
+    ++count; BILibStruct20 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct30" preprocess:^BILibStruct30(id target){
+    ++count; BILibStruct30 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct40" preprocess:^BILibStruct40(id target){
+    ++count; BILibStruct40 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct50" preprocess:^BILibStruct50(id target){
+    ++count; BILibStruct50 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct60" preprocess:^BILibStruct60(id target){
+    ++count; BILibStruct60 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct70" preprocess:^BILibStruct70(id target){
+    ++count; BILibStruct70 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct80" preprocess:^BILibStruct80(id target){
+    ++count; BILibStruct80 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct90" preprocess:^BILibStruct90(id target){
+    ++count; BILibStruct90 st; return st;
+  }];
+
+  STAssertEquals(count, (int)0, @"count is invalid.");
+
+  ClassForReturnValue* c = [ClassForReturnValue new];
+  [c struct10];
+  [c struct20];
+  [c struct30];
+  [c struct40];
+  [c struct50];
+  [c struct60];
+  [c struct70];
+  [c struct80];
+  [c struct90];
+
+  STAssertEquals(count, (int)9, @"count is invalid.");
+}
+
+- (void)testReturnSomeStruct100
+{
+  __block int count = 0;
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct100" preprocess:^BILibStruct100(id target){
+    ++count; BILibStruct100 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct200" preprocess:^BILibStruct200(id target){
+    ++count; BILibStruct200 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct300" preprocess:^BILibStruct300(id target){
+    ++count; BILibStruct300 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct400" preprocess:^BILibStruct400(id target){
+    ++count; BILibStruct400 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct500" preprocess:^BILibStruct500(id target){
+    ++count; BILibStruct500 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct600" preprocess:^BILibStruct600(id target){
+    ++count; BILibStruct600 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct700" preprocess:^BILibStruct700(id target){
+    ++count; BILibStruct700 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct800" preprocess:^BILibStruct800(id target){
+    ++count; BILibStruct800 st; return st;
+  }];
+  [BILib injectToClassWithName:@"ClassForReturnValue" methodName:@"struct900" preprocess:^BILibStruct900(id target){
+    ++count; BILibStruct900 st; return st;
+  }];
+
+  STAssertEquals(count, (int)0, @"count is invalid.");
+
+  ClassForReturnValue* c = [ClassForReturnValue new];
+  [c struct100];
+  [c struct200];
+  [c struct300];
+  [c struct400];
+  [c struct500];
+  [c struct600];
+  [c struct700];
+  [c struct800];
+  [c struct900];
+
+  STAssertEquals(count, (int)9, @"count is invalid.");
 }
 
 @end

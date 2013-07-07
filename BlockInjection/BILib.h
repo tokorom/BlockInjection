@@ -28,14 +28,6 @@
 
 + (void)clear;
 
-/**
- * Deprecated
- */
-+ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class preprocess:(id)preprocess __deprecated;
-+ (BOOL)injectToSelector:(SEL)sel forClass:(Class)class postprocess:(id)postprocess __deprecated;
-+ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className preprocess:(id)preprocess __deprecated;
-+ (BOOL)injectToSelectorWithMethodName:(NSString*)methodName forClassName:(NSString*)className postprocess:(id)postprocess __deprecated;
-
 @end
 
 #pragma mark - Inline methods

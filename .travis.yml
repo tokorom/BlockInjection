@@ -5,4 +5,4 @@ before_install:
 script:
   - make clean test-with-coverage
 after_success:
-  - coveralls -t x8CmhQavJgoF3poFVTCXewfjYZbpohQJx --verbose
+  - make send-coverage

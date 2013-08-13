@@ -12,7 +12,8 @@ test:
 		-target $(TEST_TARGET) \
 		-sdk iphonesimulator \
 		-configuration Debug \
-		TEST_AFTER_BUILD=YES
+		TEST_AFTER_BUILD=YES \
+		TEST_HOST=
 
 test-with-coverage:
 	xcodebuild \
@@ -21,6 +22,7 @@ test-with-coverage:
 		-sdk iphonesimulator \
 		-configuration Debug \
 		TEST_AFTER_BUILD=YES \
+		TEST_HOST= \
 		GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES \
 		GCC_GENERATE_TEST_COVERAGE_FILES=YES
 

@@ -27,7 +27,5 @@ test-with-coverage:
 		GCC_GENERATE_TEST_COVERAGE_FILES=YES
 
 send-coverage:
-	find ./ -name "*Test.gcno" | xargs rm
 	coveralls \
-		--verbose 
-
+		-e BlockInjectionTest/Tests

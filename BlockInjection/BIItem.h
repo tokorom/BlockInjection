@@ -28,4 +28,6 @@
 
 - (void)skipAfterProcessesWithReturnValue:(void*)pReturnValue;
 
+- (void)restoreOriginal;
+
 @end

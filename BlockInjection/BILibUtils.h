@@ -9,8 +9,8 @@
 @interface BILibUtils : NSObject
 
 + (NSString*)saveNameForMethodName:(NSString*)methodName;
-+ (NSString*)preprocessNameForMethodName:(NSString*)methodName index:(int)index;
-+ (NSString*)postprocessNameForMethodName:(NSString*)methodName index:(int)index;
++ (NSString*)preprocessNameForClassName:(NSString*)className methodName:(NSString*)methodName index:(NSUInteger)index;
++ (NSString*)postprocessNameForClassName:(NSString*)className methodName:(NSString*)methodName index:(NSUInteger)index;
 + (NSString*)superNameForMethodName:(NSString*)methodName;
 
 + (Method)getMethodInClass:(Class)class selector:(SEL)selector;

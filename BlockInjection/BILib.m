@@ -180,21 +180,6 @@
 {
   @try {
     NSString* methodName = NSStringFromSelector(sel);
-    SEL saveSel = sel_registerName([[BILibUtils saveNameForMethodName:methodName] UTF8String]);
-    BOOL isClassMethod = NO;
-    Method originalMethod = [BILibUtils getMethodInClass:class selector:sel isClassMethod:&isClassMethod];
-    Method savedMethod = [BILibUtils getMethodInClass:class selector:saveSel];
-
-    if (!savedMethod) {
-      // Save original method
-      [BILibUtils addMethodToClass:class selector:saveSel imp:method_getImplementation(originalMethod) typeEncoding:method_getTypeEncoding(originalMethod) isClassMethod:isClassMethod];
-    }
-
-    if (!originalMethod) {
-      NSLog(@"BILib: [%@ %@] is not found.", NSStringFromClass(class), methodName);
-      return NO;
-    }
-    
     if ([methodName hasPrefix:@"__mi_"]) {
       return NO;
     }
@@ -203,27 +188,36 @@
       return NO;
     }
 
-    @try {
-      [NSMethodSignature signatureWithObjCTypes:method_getTypeEncoding(originalMethod)];
-    } @catch (NSException* exception) {
-      @throw exception;
+    BOOL isClassMethod = NO;
+    Method originalMethod = [BILibUtils getMethodInClass:class selector:sel isClassMethod:&isClassMethod];
+    if (!originalMethod) {
+      NSLog(@"BILib: [%@ %@] is not found.", NSStringFromClass(class), methodName);
+      return NO;
     }
 
     // Replace implementation
     BIItem* item = [[BIItemManager sharedInstance] itemForMethodName:methodName forClass:class];
     if (!item) {
+      @try {
+        [NSMethodSignature signatureWithObjCTypes:method_getTypeEncoding(originalMethod)];
+      } @catch (NSException* exception) {
+        @throw exception;
+      }
+        
       item = [BIItem new];
       item.targetClass = class;
       item.targetSel = sel;
-      item.originalSel = saveSel;
+      item.originalSel = sel_registerName([[BILibUtils saveNameForMethodName:methodName] UTF8String]);
       item.originalMethod = originalMethod;
       item.numberOfArguments = method_getNumberOfArguments(originalMethod) - 2;
       item.signature = [NSMethodSignature signatureWithObjCTypes:method_getTypeEncoding(originalMethod)];
       item.isClassMethod = isClassMethod;
+        
+      [BILib replaceImplementationWithItem:item];
+        
       [[BIItemManager sharedInstance] setItem:item forMethodName:methodName forClass:class];
     }
     [BILib savePreprocess:preprocess andPostprocess:postprocess withItem:item forMethodName:methodName];
-    [BILib replaceImplementationWithItem:item];
   } @catch (NSException* exception) {
     NSLog(@"BILib handled a exception: %@", exception);
     return NO;
@@ -244,7 +238,9 @@
 {
   if (preprocess) {
     // Save preprocess
-    SEL preprocessSel = sel_registerName([[BILibUtils preprocessNameForMethodName:methodName index:[item numberOfPreprocess]] UTF8String]);
+    SEL preprocessSel = sel_registerName([[BILibUtils preprocessNameForClassName:NSStringFromClass(item.targetClass)
+                                                                      methodName:methodName
+                                                                           index:[item numberOfPreprocess]] UTF8String]);
     [BILibUtils addMethodToClass:item.targetClass
                         selector:preprocessSel
                              imp:imp_implementationWithBlock(preprocess)
@@ -254,7 +250,9 @@
   }
   if (postprocess) {
     // Save postprocess
-    SEL postprocessSel = sel_registerName([[BILibUtils postprocessNameForMethodName:methodName index:[item numberOfPostprocess]] UTF8String]);
+    SEL postprocessSel = sel_registerName([[BILibUtils postprocessNameForClassName:NSStringFromClass(item.targetClass)
+                                                                        methodName:methodName
+                                                                             index:[item numberOfPostprocess]] UTF8String]);
     [BILibUtils addMethodToClass:item.targetClass
                         selector:postprocessSel
                              imp:imp_implementationWithBlock(postprocess)
@@ -302,7 +300,16 @@
         default: { replaceBlock = REPLACEBLOCK_FOR(int); } break;
       }
     }
-    method_setImplementation(item.originalMethod, imp_implementationWithBlock(replaceBlock));
+    [BILibUtils addMethodToClass:item.targetClass
+                        selector:item.originalSel
+                             imp:method_getImplementation(item.originalMethod)
+                    typeEncoding:method_getTypeEncoding(item.originalMethod)
+                   isClassMethod:item.isClassMethod];
+    [BILibUtils addMethodToClass:item.targetClass
+                        selector:item.targetSel
+                             imp:imp_implementationWithBlock(replaceBlock)
+                    typeEncoding:method_getTypeEncoding(item.originalMethod)
+                   isClassMethod:item.isClassMethod];
   }
 }
 

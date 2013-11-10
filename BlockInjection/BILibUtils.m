@@ -15,14 +15,14 @@
   return [NSString stringWithFormat:@"__mi_save_%@", methodName];
 }
 
-+ (NSString*)preprocessNameForMethodName:(NSString*)methodName index:(int)index
++ (NSString*)preprocessNameForClassName:(NSString*)className methodName:(NSString*)methodName index:(NSUInteger)index
 {
-  return [NSString stringWithFormat:@"__mi_pre_%d_%@", index, methodName];
+    return [NSString stringWithFormat:@"__mi_%@_pre_%lu_%@", className, (unsigned long)index, methodName];
 }
 
-+ (NSString*)postprocessNameForMethodName:(NSString*)methodName index:(int)index
++ (NSString*)postprocessNameForClassName:(NSString*)className methodName:(NSString*)methodName index:(NSUInteger)index
 {
-  return [NSString stringWithFormat:@"__mi_post_%d_%@", index, methodName];
+    return [NSString stringWithFormat:@"__mi_%@_post_%lu_%@", className, (unsigned long)index, methodName];
 }
 
 + (NSString*)superNameForMethodName:(NSString*)methodName
@@ -50,15 +50,13 @@
 
 + (void)addMethodToClass:(Class)class selector:(SEL)selector imp:(IMP)imp typeEncoding:(const char*)typeEncoding isClassMethod:(BOOL)isClassMethod
 {
-  Method method = [BILibUtils getMethodInClass:class selector:selector];
-  if (method) {
-    method_setImplementation(method, imp);
-  } else {
     if (isClassMethod) {
-      class = object_getClass(class);
+        class = object_getClass(class);
     }
-    class_addMethod(class, selector, imp, typeEncoding);
-  }
+    // The method is added first, to avoid setting the method implementation of a superclass.
+    if (!class_addMethod(class, selector, imp, typeEncoding)) {
+        method_setImplementation(class_getInstanceMethod(class, selector), imp);
+    }
 }
 
 + (NSArray*)classesWithRegex:(NSRegularExpression*)regex

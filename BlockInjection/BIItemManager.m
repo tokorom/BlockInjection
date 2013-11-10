@@ -5,6 +5,7 @@
 //
 
 #import "BIItemManager.h"
+#import "BIItem.h"
 
 static BIItemManager* sharedInstance = nil;
 
@@ -26,9 +27,15 @@ static BIItemManager* sharedInstance = nil;
   [self.items setObject:item forKey:[self keyForMethodName:methodName forClass:class]];
 }
 
+- (void)removeItemForMethodName:(NSString*)methodName forClass:(Class)class {
+  [self removeItemForKey:[self keyForMethodName:methodName forClass:class]];
+}
+
 - (void)clear
 {
-  self.items = [NSMutableDictionary dictionary];
+  for (NSString *key in [self.items allKeys]) {
+      [self removeItemForKey:key];
+  }
 }
 
 #pragma mark - Memory Management
@@ -46,6 +53,14 @@ static BIItemManager* sharedInstance = nil;
 - (NSString*)keyForMethodName:(NSString*)methodName forClass:(Class)class
 {
   return [NSString stringWithFormat:@"%@::%@", NSStringFromClass(class), methodName];
+}
+
+- (void)removeItemForKey:(NSString*)key {
+  BIItem *item = [self.items objectForKey:key];
+  if (!item)
+    return;
+  [item restoreOriginal];
+  [self.items removeObjectForKey:key];
 }
 
 #pragma mark - Singleton

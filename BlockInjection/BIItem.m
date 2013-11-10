@@ -30,6 +30,31 @@
   return self;
 }
 
+- (void)restoreOriginal
+{
+  Class class = self.isClassMethod ? object_getClass(self.targetClass) : self.targetClass;
+  IMP imp = method_setImplementation(class_getInstanceMethod(class, self.targetSel), class_getMethodImplementation(class, self.originalSel));
+  if (imp) {
+    imp_removeBlock(imp);
+  }
+
+  for (NSValue *value in self.preprocesses) {
+    IMP imp = class_getMethodImplementation(class, [value pointerValue]);
+    if (imp) {
+      imp_removeBlock(imp);
+    }
+  }
+  self.preprocesses = [NSMutableArray array];
+
+  for (NSValue *value in self.postprocesses) {
+    IMP imp = class_getMethodImplementation(class, [value pointerValue]);
+    if (imp) {
+      imp_removeBlock(imp);
+    }
+  }
+  self.postprocesses = [NSMutableArray array];
+}
+
 - (void)dealloc
 {
   if (self.pResult) {

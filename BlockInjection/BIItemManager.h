@@ -15,6 +15,7 @@
 
 - (BIItem*)itemForMethodName:(NSString*)methodName forClass:(Class)class;
 - (void)setItem:(BIItem*)item forMethodName:(NSString*)methodName forClass:(Class)class;
+- (void)removeItemForMethodName:(NSString*)methodName forClass:(Class)class;
 
 - (void)clear;
 
